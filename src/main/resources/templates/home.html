@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/include/header :: headerFrag"></th:block>
+
+<!-- 컨텐츠 -->
+<div class="container">
+
+    <!-- Carousel -->
+    <div id="demo" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+            <!--     <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="4"></button> -->
+        </div>
+
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner " >
+            <div class="carousel-item active text-center">
+                <img src="/css/images/1.jpg" alt=".." class="d-block" width="800">
+            </div>
+            <div class="carousel-item">
+                <img src="/css/images/2.jpg" alt=".." class="d-block" width="800">
+            </div>
+            <div class="carousel-item">
+                <img src="/css/images/3.jpg" alt=".." class="d-block" width="800">
+            </div>
+        </div>
+
+        <!-- Left and right controls/icons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <!-- 유튜브 공유 -> 퍼가기 -> 링크복사, 붙여넣기-->
+        <iframe class="me-5" width="590" height="350" src="https://www.youtube.com/embed/2eYdgSQFzHo?si=IlHv-5IQTl9HYqYa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <!-- 구글 지도 -->
+        <iframe class="" width="590" height="350" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3163.5858862087116!2d126.83558397632231!3d37.54125802557646!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9d6d50233e11%3A0x3e349d96540c9f16!2z7J207KCg7Lu07ZOo7YSw7JWE7Lm0642w66-4IO2ZlOqzoey6oO2NvOyKpA!5e0!3m2!1sko!2skr!4v1706924687499!5m2!1sko!2skr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+</div>
+
+<!-- 푸터 -->
+<th:block th:replace="/include/footer :: footerFrag"></th:block>
+
+</body>
+</html>
+

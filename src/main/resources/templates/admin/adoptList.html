@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+
+<div class="container shadow-sm w-75 p-5 rounded mt-5">
+
+        <h2 class="text-center mb-5">입양 신청리스트</h2>
+        <table class='table'>
+            <thead class=''>
+                <tr>
+                    <th>PetNo</th>
+                    <th>PetImage</th>
+                    <th>지역</th>
+                    <th>보호소 이름</th>
+                    <th>첫 신청날짜</th>
+                    <th>UserCount</th>
+<!--                    <th>UserId</th>-->
+<!--                    <th>UserName</th>-->
+<!--                    <th>UserTel</th>-->
+<!--                    <th>UserEmail</th>-->
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="adopt : ${adoptPetList}">
+                    <tr>
+                        <td th:text="${adopt.getPetNo()}">PetNo</td>
+                        <td>                           <!--Get 쿼리스트링 방식-->
+                            <a th:href="@{/admin/adoptList2(petNo=${adopt.getPetNo()})}">
+                                <img th:src="@{/fileRepo/}+${adopt.getPetImage()}" alt="" width="60px" height="60px"></a>
+                        </td>
+                        <td th:text="${adopt.getShelArea()}">지역</td>
+                        <td th:text="${adopt.getShelName()}">보호소 이름</td>
+                        <td th:text="${adopt.getAdoptUpdateDate()}">첫 신청날짜</td>
+                        <td th:text="${adopt.getAdoptCnt()+'명 신청 중'}">AdoptCnt</td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+
+    <!--페이징-->
+    <ul class="pagination mt-5 justify-content-center">
+        <li class="page-item" th:class="${prevPage <= 0} ? 'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/admin/adoptList/(page=${prevPage - 1})}">이전페이지</a>
+        </li>
+        <li class="page-item" th:each="page : ${#numbers.sequence(blockStart, blockEnd)}" th:class="${page == adoptPetList.number+1} ? 'page-item active':'page-item'">
+            <a class="page-link" th:text="${page}" th:href="@{/admin/adoptList/(page=${page - 1})}">현재페이지</a>
+        </li>
+        <li class="page-item" th:class="${blockEnd == adoptPetList.totalPages} ? 'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/admin/adoptList/(page=${nextPage - 1})}">다음페이지</a>
+        </li>
+    </ul>
+</div>
+
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</body>
+</html>

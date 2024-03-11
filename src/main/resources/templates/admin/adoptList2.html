@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+
+<div class="container shadow-sm w-75 p-5 rounded mt-5">
+
+                <div class="text-center mb-5" style="text-align: center">
+                    <h2 class="text-center mb-5" th:text="${petNo+'번 입양 신청리스트'}"></h2>
+                    <img th:src="@{/fileRepo/}+${image}" alt="" width="400px" height="400px">
+                </div>
+    <table class='table'>
+        <thead class=''>
+        <tr>
+            <th>UserId</th>
+            <th>UserName</th>
+            <th>UserAge</th>
+            <th>UserTel</th>
+            <th>UserEmail</th>
+            <th>RoadAddr</th>
+            <th>입양확정</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="adopt : ${adoptList2}">
+            <tr>
+                <td th:text="${adopt.getUserId()}">UserId</td>
+                <td th:text="${adopt.getUserName()}">UserName</td>
+                <td th:text="${adopt.getUserAge()}">UserAge</td>
+                <td th:text="${adopt.getUserTel()}">UserTel</td>
+                <td th:text="${adopt.getUserEmail()}">UserEmail</td>
+                <td th:text="${adopt.getRoadAddr()}">RoadAddr</td>
+                <!-- |자바스크립트| <== 자바스크립트를 바로 사용하겠다
+                   1. href="javascript:alert('로그인이 필요합니다!!')
+                   2. th:onclick="|location.href = '@{/admin/adoptOk(no=${adopt.getNo()},petNo=${adopt.getPetNo})}'|"
+                        1번과 2번은 같은말 -->
+<!--                <td><button class="btn btn-outline-primary btn-sm"--> <!--|... | = Get방식과 동일-->
+<!--                            th:onclick="|location.href = '@{/admin/adoptOk(no=${adopt.getNo()},petNo=${adopt.getPetNo})}'|">입양확정</button><td>-->
+                <td><button class="btn btn-outline-primary btn-sm"
+                            th:onclick="|deleteAdopt(${adopt.getNo()}, ${adopt.getPetNo()})|">입양확정</button><td>
+                <!-- 2번과 같은말이지만, 하단 자바스크립트 confirm 기능을 사용하기 위해 위와 같이 변경 -->
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+
+    <!--페이징-->
+    <ul class="pagination mt-5 justify-content-center">
+        <li class="page-item" th:class="${prevPage <= 0} ? 'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/admin/adoptList2/(page=${prevPage - 1},petNo=${petNo})}">이전페이지</a>
+        </li>
+        <li class="page-item" th:each="page : ${#numbers.sequence(blockStart, blockEnd)}" th:class="${page == adoptList2.number+1} ? 'page-item active':'page-item'">
+            <a class="page-link" th:text="${page}" th:href="@{/admin/adoptList2/(page=${page - 1},petNo=${petNo})}">현재페이지</a>
+        </li>
+        <li class="page-item" th:class="${blockEnd == adoptList2.totalPages} ? 'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/admin/adoptList2/(page=${nextPage - 1},petNo=${petNo})}">다음페이지</a>
+        </li>
+    </ul>
+
+</div>
+<script>
+    function deleteAdopt(no, petNo) {
+        if (confirm("정말로 입양확정을 하시겠습니까?")) {
+            location = "/admin/adoptOk?no="+no+"&petNo="+petNo;
+        } else {
+            return false;
+        }
+    }
+</script>
+
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</body>
+</html>

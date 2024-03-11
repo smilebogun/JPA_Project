@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+
+<!-- 컨텐츠 -->
+<div class="container shadow-sm p-5 rounded mt-5">
+    <h2 class="text-center mb-5">고 객 센 터</h2>
+    <ul class="nav justify-content-center">
+        <li class="nav-items me-2 ca">
+            <a th:class="${cat == '공지사항'} ? 'nav-link ca selected':'nav-link ca'" th:href="@{/admin/sc/category/{category}(category='공지사항')}">공지사항</a>
+        </li>
+        <li class="nav-items me-2 ca">
+            <a th:class="${cat == 'F&A'} ? 'nav-link ca selected':'nav-link ca'" th:href="@{/admin/sc/category/{category}(category='F&A')}">F & A</a>
+        </li>
+        <li class="nav-items me-2 ca">
+            <a th:class="${cat == 'Q&A'} ? 'nav-link ca selected':'nav-link ca'" th:href="@{/admin/sc/category/{category}(category='Q&A')}">Q & A</a>
+        </li>
+    </ul>
+
+    <table class="table mt-5">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>답변여부</th>
+        </tr>
+        </thead>
+        <tbody >
+        <th:block th:each="qa : ${qaList}">
+            <tr>
+                <td class="col-2" th:text="${qa.id}">index</td>
+                <!--                        <td th:text="${sc.scCategory}">category</td>-->
+                <td><a class="col-8" th:href="@{/admin/QA/get/{id}(id=${qa.id})}" th:text="${qa.qaTitle}">title</a></td>
+                <td class= "col-2" style="" th:text="${qa.answer}">updateTime</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <th:block th:if="${qaList.totalPages != 0}">
+        <ul class="pagination mt-5 justify-content-center">         <!--/?page=2 -->
+            <li class="page-item" th:class="${prevPage<=0} ? 'page-item disabled':'page-item'">
+                <a class="page-link" th:href="@{/admin/sc/QaA/(page=${prevPage - 1})}">이전페이지</a>
+            </li>
+            <li class="page-item" th:each="page : ${#numbers.sequence(blockStart,blockEnd)}"
+                th:class="${page == qaList.number + 1 } ? 'page-item active':'page-item'"
+                th:if="${qaList != null}">
+                <a class="page-link" th:text="${page}" th:href="@{/admin/sc/QaA/(page=${page - 1})}">현재 페이지 블럭</a>
+            </li>
+            <li class="page-item" th:class="${blockEnd == qaList.totalPages} ? 'page-item disabled':'page-item'">
+                <a class="page-link" th:href="@{/admin/sc/QaA/(page=${nextPage - 1})}">다음페이지</a>
+            </li>
+        </ul>
+    </th:block>
+</div>
+
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+
+</body>
+</html>

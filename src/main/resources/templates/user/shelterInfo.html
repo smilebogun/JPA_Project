@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xml:th="http://www,thymeleaf.org">
+<!--헤더-->
+<th:block th:replace="/include/header :: headerFrag"></th:block>
+<!-- ------------------추가파일--------------- -->
+<!--컨텐츠-->
+<div class="container shadow-sm rounded w-75 mt-5 p-5">
+    <!--    <form class="form-join">-->
+    <input type="hidden" id="no" th:value="${shelter.no}"/>
+    <!--        <div class="mb-4">-->
+    <!--                <p style="display:inline; font-size:25px; font-weight: bold; border-radius: 0 15px 15px 0; border-left: inset; padding: 0.6em; background: #EBEEF0;"-->
+    <!--                   type="text" class="" name="shel_name" id="shel_name" th:text="${shelter.shelName}"></p>-->
+    <!--        </div>-->
+    <div class="main">
+        <!--            <div class="">-->
+        <!--                <p style="text-align:center; font-size:40px; font-weight: bold;" type="text" class="two_text" name="shel_name" id="shel_name" th:text="${shelter.shelName}">th:text</p>-->
+        <!--            </div>-->
+        <div class="text-center mb-5">
+            <h2 class="two_text" id="shel_name" th:text="${shelter.shelName}"></h2>
+        </div>
+    </div>
+
+    <h3 style="background: #dcdcdc; border-left: 0.5em solid #0A82FF; padding: 0.5em;">&nbsp;&nbsp;&nbsp;오 시 는 길</h3>
+
+    <div class="main2" style="margin-top: 30px; font-size: 20px; padding-left: 50px">
+        &#10004;&nbsp;&nbsp;주소 : <td th:text="${shelter.getShelAddress()+'('+shelter.getShelPostcode()+')'+ shelter.shelDetailAddress}"></td>
+        </br>&#10004;&nbsp;&nbsp;전화번호 : <td type="text" class="" name="shel_tel" id="shel_tel" th:text="${shelter.shelTel}"></td>
+    </div>
+
+    <!-- 지도를 담을 영역 만들기 -->
+    <div class="text-center" style="padding-left: 50px">
+        <div class="text-center" id="map" style="width:900px;height:600px; margin-top: 30px; ">
+            <!-- 실제 지도를 그리는 Javascript API를 불러오기 -->                           <!--  -->
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=895ce80640f690c545783f0ea2ab2599&autoload=false&libraries=services"></script>
+            <!-- script -->
+            <script th:inline="javascript">
+                // var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+                //     mapOption = {
+                //         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                //         level: 3 // 지도의 확대 레벨
+                //     };
+                //
+                // // 지도를 생성합니다
+                // var map = new kakao.maps.Map(mapContainer, mapOption);
+
+                // 주소
+                let addr1 = [[${shelter.getShelAddress()}]];
+                let zip = '('+[[${shelter.getShelPostcode()}]]+')';
+
+                let addr = addr1 + zip;
+                // console.log(addr);
+
+                var geocoder;
+
+                kakao.maps.load(() => {
+                    const container = document.getElementById('map'); // 지도를 표시할 div
+                    const options = {
+                        center:new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                        level: 3, // 지도의 확대 레벨
+                    };
+
+                    const map = new kakao.maps.Map(container, options);
+
+                    // 주소-좌표 변환 객체를 생성합니다
+                    geocoder = new kakao.maps.services.Geocoder();
+
+                    // 주소로 좌표를 검색합니다
+                    geocoder.addressSearch(addr, function(result, status) {
+
+                        // 정상적으로 검색이 완료됐으면
+                        if (status === kakao.maps.services.Status.OK) {
+
+                            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                            // 결과값으로 받은 위치를 마커로 표시합니다
+                            var marker = new kakao.maps.Marker({
+                                map: map,
+                                position: coords
+                            });
+
+                            // 인포윈도우로 장소에 대한 설명을 표시합니다
+                            var infowindow = new kakao.maps.InfoWindow({
+                                content: '<div style="width:150px;text-align:center;padding:6px 0;">[[${shelter.shelName}]]</div>'
+                            });
+                            infowindow.open(map, marker);
+
+                            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                            map.setCenter(coords);
+                        }
+                    });
+                });
+
+            </script>
+        </div>
+    </div>
+    <div class="text-center mt-5">
+        <button class=" btn btn btn-secondary" onclick="history.back()">뒤로</button>
+    </div>
+    <!--    </form>-->
+</div>
+
+<!--<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 이거 뭐임-->
+
+<!--&lt;!&ndash; 마커를 클러스터링 할 수 있는 클러스터러 라이브러리 입니다.&ndash;&gt;-->
+<!--<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script>-->
+
+<!--&lt;!&ndash; services 라이브러리 불러오기 장소 검색 과 주소-좌표 변환 을 할 수 있는 services 라이브러리 입니다. &ndash;&gt;-->
+<!--<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>-->
+
+<!-- kakao 지도 api (+ services와 clusterer, drawing 라이브러리 불러오기) -->
+<!--
+@libraries 설명 for kakao
+   clusterer: 마커를 클러스터링 할 수 있는 클러스터러 라이브러리 입니다.
+   services: 장소 검색 과 주소-좌표 변환 을 할 수 있는 services 라이브러리 입니다.
+   drawing: 지도 위에 마커와 그래픽스 객체를 쉽게 그릴 수 있게 그리기 모드를 지원하는 drawing 라이브러리 입니다.
+-->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+
+<!--푸터-->
+<th:block th:replace="/include/footer :: footerFrag"></th:block>
+</html>

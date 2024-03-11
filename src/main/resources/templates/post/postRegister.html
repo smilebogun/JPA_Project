@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/include/header :: headerFrag"></th:block>
+
+<!-- 컨텐츠 -->
+<div class="container shadow-sm w-50 p-5 rounded mt-5">
+    <h2 class="text-center mb-5">게시판 작성하기</h2>
+    <hr class="sc-hr">
+    <form class="form-join">
+        <div class="form-group mt-5 mb-2">
+            <label for="category" class="form-label">카테고리</label>
+            <div class="d-flex justify-content-between">
+                <select class="form-select me-5" name="category" id="category" style="width:200px">
+                        <option value="자유 게시판">자유 게시판</option>
+                        <option value="찾습니다">찾습니다</option>
+                        <option value="우리 이제 함께에요">우리 이제 함께에요</option>
+                        <option value="너와 나 그리고 우리">너와 나 그리고 우리</option>
+                </select>
+
+                <div class="dropdown">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" th:text="${name}+'님의 임시저장 목록'"></button>
+                    <ul class="dropdown-menu dropdown-menu-end text-start">
+                        <th:block th:each="temp : ${tempList}">
+                            <li><a class="ms-3" th:href="@{/post/temp/{bno}(bno=${temp.id})}" th:text="${temp.postTitle}"></a></li>
+                        </th:block>
+                    </ul>
+                </div>
+            </div>
+        </div>
+            <div class="form-group  mt-2 mb-2">
+                <label for="title" class="form-label">제목</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="포스트제목" required>
+            </div>
+                <div class="form-group mb-2">
+                    <label class="form-label">내용</label>
+
+                        <textarea style="height:250px" class="form-control" name="content" id="content" placeholder="내용" required></textarea>
+                </div>
+        <div id="div-file">
+            <input type="file" class="form-control form-control" id="image"/>
+        </div>
+    </form>
+    <div class="text-center mt-5">
+        <button class="btn btn-success me-2" id="register">등록</button>
+        <button class="btn btn-secondary me-2" id="temp">임시 저장</button>
+        <button class="btn btn-danger" onclick="history.back()">취소</button>
+    </div>
+</div>
+
+<script src="/js/post.js"></script>
+<!-- 푸터 -->
+<th:block th:replace="/include/footer :: footerFrag"></th:block>
+
+</body>
+</html>

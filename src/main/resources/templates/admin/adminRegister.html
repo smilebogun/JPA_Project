@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+
+<div class="container shadow-sm w-50 p-5 rounded mt-5">
+    <form class="form-join" th:action="@{/admin/register}" method="post">
+        <h2 class="text-center">관리자 회원가입</h2><br>
+        <div class="mt-2 mb-2">
+            <label for="adminId" class="form-label">아이디</label>
+            <input class="form-control mb-2" type="text" id="adminId" name="adminId" placeholder="아이디">
+        </div>
+        <div class="mb-2">
+            <label for="adminPw" class="form-label">비밀번호</label>
+            <input class="form-control mb-2" type="password" id="adminPw" name="adminPw" placeholder="비밀번호">
+        </div>
+        <div class="form-group mb-2">
+            <label for="adminName" class="form-label">이름</label>
+            <input class="form-control mb-2" type="text" id="adminName" name="adminName" placeholder="이름">
+        </div>
+        <div class="form-group mb-2">
+            <label for="adminTel" class="form-label">전화번호</label>
+            <input class="form-control mb-2" type="text" id="adminTel" name="adminTel" placeholder="전화번호">
+        </div>
+        <div class="mb-2">
+            <label for="adminEmail" class="form-label">이메일</label>
+            <input class="form-control mb-2" type="text" id="adminEmail" name="adminEmail" placeholder="이메일">
+        </div>
+        <div class="mb-2">
+            <label for="adminRole" class="form-label">권한</label>
+            <select class="form-select" name="adminRole" id="adminRole" placeholder="권한" required>>
+                <option value="" selected="selected" disabled>권한선택</option>
+                <option value="ROLE_USER">USER</option>
+                <option value="ROLE_MANAGER">MANAGER</option>
+                <option value="ROLE_ADMIN">ADMIN</option>
+            </select>
+        </div>
+    </form>
+    <div class="text-center mt-5">
+        <input type="submit" id="btn-save" class="btn btn-success me-2" value="회원가입">
+        <input type="reset" id="registerReset" class="btn btn-warning" value="취소">
+    </div>
+</div>
+<script src="/js/admin/admin.js"></script>
+
+<script>
+    // 리셋버튼 활성화
+    $("#registerReset").on("click", function(){
+        $("#adminId").val("");
+        $("#adminPw").val("");
+        $("#adminName").val("");
+        $("#adminTel").val("");
+        $("#adminEmail").val("");
+        $("#adminRole").val("");
+    });
+</script>
+
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</body>
+</html>

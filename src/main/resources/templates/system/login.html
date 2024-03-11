@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="/include/header :: headerFrag"></th:block>
+
+<!-- 컨텐츠 -->
+<div class="container shadow-sm w-50 p-5 rounded mt-5">
+    <form class="form-join" th:action="@{/memberLogin.do}" method="post">
+        <h2 class="text-center mb-5">로그인</h2>
+        <div class="form-group mb-3">
+            <label for="id" class="form-label">Username</label>
+            <input type="text" class="form-control" name="id" id="id" placeholder="User" required>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="pw" class="form-label">Password</label>
+            <input type="password" class="form-control" name="pw" id="pw" placeholder="Password" required>
+        </div>
+
+    </form>
+    <div class="text-center mt-5">
+        <!--<input type="submit" id="btn-login" class="btn btn-primary w-100" value="로그인"/>-->
+        <input type="submit" id="btn-login" class="btn btn-success w-25 me-2" value="로그인"/>
+        <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=14f0feede173ead67552a0434a92fe35&redirect_uri=http://localhost:8899/oauth/kakao">
+            <img src="/css/images/kakao_login.png" class="kakaoIMG" style="width: 170px"></a>
+    </div>
+<!--    <div class="text-center mt-5">-->
+<!--        <button type="submit" id="btn-login" class="btn btn-success btn-lg">로그인</button>-->
+<!--    </div>-->
+
+    <div class="mt-4 w-100 findIdPw">
+        <div class="d-flex justify-content-between">
+            <div><i class="fa fa-lock"></i>&nbsp;<a href="idPwFind.do?find=id">아이디</a>
+                <a>&nbsp;|&nbsp;&nbsp;</a><i class="fa fa-lock"></i>&nbsp;<a href="idPwFind.do?find=pw">비밀번호 찾기</a></div>
+            <div><i class="fa fa-user-plus"></i>&nbsp;<a href="memberRegister.do">회원가입</a></div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/js/login.js"></script>
+
+<th:block th:replace="/include/footer :: footerFrag"></th:block>
+</body>
+</html>

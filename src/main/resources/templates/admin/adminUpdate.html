@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+
+<div class="container shadow-sm w-50 p-5 rounded mt-4">
+    <h2 class="text-center mb-4">관리자 수정</h2>
+    <form class="">
+        <input type="hidden" id="no" th:value="${admin.no}">
+        <div class="">
+            <div>
+                <label for="adminId" class="form-label">아이디(수정불가)</label>
+                <input type="text" class="form-control mb-2" name="adminId" id="adminId" th:value="${admin.adminId}" readonly>
+            </div>
+            <div>
+                <label for="adminPw" class="form-label">비밀번호(수정불가)</label>
+                <input type="text" class="form-control mb-2" name="adminPw" id="adminPw" th:value="${admin.adminPw}" readonly>
+            </div>
+            <div>
+                <label for="adminName" class="form-label">이름</label>
+                <input type="text" class="form-control mb-2" name="adminName" id="adminName" th:value="${admin.adminName}">
+            </div>
+            <div>
+                <label for="adminTel" class="form-label">전화번호</label>
+                <input type="text" class="form-control mb-2" name="adminTel" id="adminTel" th:value="${admin.adminTel}">
+            </div>
+            <div>
+                <label for="adminEmail" class="form-label">이메일(수정불가)</label>
+                <input type="text" class="form-control mb-2" name="adminEmail" id="adminEmail" th:value="${admin.adminEmail}" readonly>
+            </div>
+            <div>
+                <label for="adminRole" class="form-label">권한(수정불가)</label>
+                <input type="text" class="form-control mb-2" name="adminRole" id="adminRole" th:value="${admin.adminRole}" readonly>
+            </div>
+
+        </div>
+    </form>
+    <div class="text-center mt-4">
+        <button id="btn-update"class="btn btn-success me-2">관리자 수정</button>
+        <button id="btn-delete" class="btn btn-danger me-2">삭제</button>
+        <button class="btn btn-secondary me-2" onclick="history.back()">뒤로</button>
+
+    </div>
+</div>
+
+<script src="/js/admin/admin.js"></script>
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</body>
+</html>

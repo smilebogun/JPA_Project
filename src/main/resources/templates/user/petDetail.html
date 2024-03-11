@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/include/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+<div class="container shadow-sm rounded w-75 mt-5 p-5">
+    <h2 class="text-center mb-5" style="text-align: center">보호 동물 정보</h2>
+    <form class="form-join" th:action="@{/petAdopt.do}" method="post">
+
+                <input type="hidden" id="petNo" name="petNo" th:value="${list.getNo()}">
+                <input type="hidden" id="shelName" name="shelName" th:value="${list.getShelName()}">
+                <input type="hidden" id="shelArea" name="shelArea" th:value="${list.getShelArea()}">
+                <input type="hidden" id="petSpecies" name="petSpecies" th:value="${list.getPetSpecies()}">
+                <input type="hidden" id="petName" name="petName" th:value="${list.getPetName()}">
+                <input type="hidden" id="petAge" name="petAge" th:value="${list.getPetAge()}">
+                <input type="hidden" id="petGender" name="petGender" th:value="${list.getPetGender()}">
+                <input type="hidden" id="petNeutering" name="petNeutering" th:value="${list.getPetNeutering()}">
+                <input type="hidden" id="petInoculation" name="petInoculation" th:value="${list.getPetInoculation()}">
+                <input type="hidden" id="petPlace" name="petPlace" th:value="${list.getPetPlace()}">
+                <input type="hidden" id="petRemarks" name="petRemarks" th:value="${list.getPetRemarks()}">
+                <input type="hidden" id="petImage" name="petImage" th:value="${list.getPetImage()}">
+                <input type="hidden" id="petAdopt" name="petAdopt" th:value="${list.getPetAdopt()}">
+                <input type="hidden" id="petSysdate" name="petSysdate" th:value="${list.getPetSysdate()}">
+                <input type="hidden" id="petUpdate" name="petUpdate" th:value="${list.getPetUpdate()}">
+
+            <div style="text-align:center">
+                <img th:src="@{/fileRepo/}+${list.getPetImage()}" style="width: 400px; height: 400px; object-fit:cover;">
+            </div>
+
+            <div  class="d-flex justify-content-center mt-5">
+                <table id="petDetail" >
+                    <tbody>
+                        <tr>
+                            <td class="petTd1">동물</td>
+                            <td class="petTd2" th:text="${list.getPetSpecies()}"></td>
+                            <td class="petTd1">성별</td>
+                            <td class="petTd2" th:text="${list.getPetGender()}"></td>
+                        </tr>
+                        <tr>
+                            <td class="petTd1">견/묘종</td>
+                            <td class="petTd2" th:text="${list.getPetName()}"></td>
+                            <td class="petTd1">나이</td>
+                            <td class="petTd2" th:text="${list.getPetAge()}"></td>
+                        </tr>
+                        <tr>
+                            <td class="petTd1">접종 여부</td>
+                            <td class="petTd2" th:text="${list.getPetInoculation()}"></td>
+                            <td class="petTd1">중성화 여부</td>
+                            <td class="petTd2" th:text="${list.getPetNeutering()}"></td>
+                        </tr>
+                        <tr>
+                            <td class="petTd1">보호소</td>
+                            <td class="petTd2" th:text="${list.getShelName()}"></td>
+                            <td class="petTd1">지역</td>
+                            <td class="petTd2" th:text="${list.getShelArea()}"></td>
+                        </tr>
+                        <tr>
+                            <td class="petTd1">발견된 장소</td>
+                            <td class="petTd3" th:text="${list.getPetPlace()}"></td>
+                            <td class="petTd1">특이사항</td>
+                            <td class="petTd3" th:text="${list.getPetRemarks()}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    </form>
+
+    <div style="text-align:center; margin-top: 50px;">
+        <input type="submit" id="btn-adopt"
+               class="btn btn-sm btn-primary"
+               style="width: 200px; height: 50px; font-size: 15px; font-weight: bold;"
+               value="입양 신청하기">
+    </div>
+</div>
+
+
+
+<script src="/js/admin/adopt.js"></script>
+
+<!-- 푸터 -->
+<th:block th:replace="/include/footer :: footerFrag"></th:block>
+</body>
+</html>

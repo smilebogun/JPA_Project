@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/include/header :: headerFrag"></th:block>
+
+<!-- 컨텐츠 -->
+<div class="container shadow-sm rounded w-100 mt-5 p-5">
+    <h2 class="text-center">입양현황 그래프</h2><br>
+
+    <input type="hidden" id="adoptStatus1" name="adoptStatus1" th:value="${adoptStatus1}">
+    <input type="hidden" id="adoptStatus2" name="adoptStatus2" th:value="${adoptStatus2}">
+    <input type="hidden" id="adoptStatus3" name="adoptStatus3" th:value="${adoptStatus3}">
+    <input type="hidden" id="catCnt" name="catCnt" th:value="${catCnt}">
+    <input type="hidden" id="dogCnt" name="dogCnt" th:value="${dogCnt}">
+    <input type="hidden" id="userCnt" name="userCnt" th:value="${userCnt}">
+    <input type="hidden" id="petCnt" name="petCnt" th:value="${petCnt}">
+    <input type="hidden" id="shelterCnt" name="shelterCnt" th:value="${shelterCnt}">
+
+    <!-- 그래프 -->
+    <div style="padding-left: 15px">
+<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>-->
+<!--        <canvas id="bar-chart-horizontal"></canvas>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <canvas id="bar-chart" width="300" height="230"></canvas>
+        <script>
+            let adoptStatus1 = $("#adoptStatus1").val();
+            let adoptStatus2 = $("#adoptStatus2").val();
+            let adoptStatus3 = $("#adoptStatus3").val();
+            let catCnt = $("#catCnt").val();
+            let dogCnt = $("#dogCnt").val();
+
+            new Chart(document.getElementById("bar-chart"), {
+                type: 'bar',
+                data: {
+                    labels: ["입양 매칭 중", "입양매칭 실패", "입양매칭 성공"],
+                    datasets: [{
+                            labels: "Population (millions)",
+                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+                            // data: [adoptStatus1,adoptStatus2,adoptStatus3,dogCnt,catCnt]
+                            data: [adoptStatus1,adoptStatus2,adoptStatus3]
+                        }]
+                },
+                options: {
+                    legend: {
+                        display: false,
+                        labels: {
+                            fontSize: 40 // 원하는 폰트 크기로 변경하세요
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: '보호동물 입양현황',
+                        fontSize: 50
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                min: 0, // 최소값 설정
+                                max: 15, // 최대값 설정
+                                stepSize: 1, // 간격 설정
+                                fontSize: 30 // 원하는 폰트 크기로 변경하세요
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontSize: 30 // 원하는 폰트 크기로 변경하세요
+                            }
+                        }]
+                    },
+                    tooltips: {
+                        bodyFontSize: 30,
+                        titleFontSize: 30
+
+                    }
+                }
+            });
+
+            // new Chart(document.getElementById("bar-chart-horizontal"), {
+            //     type: 'horizontalBar',
+            //     data: {
+            //         labels: ["입양 매칭 중", "입양매칭 실패", "입양매칭 성공", "강아지", "고양이"],
+            //         datasets: [
+            //             {
+            //                 label: "Population (millions)",
+            //                 backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+            //                 data: [adoptStatus1,adoptStatus2,adoptStatus3,dogCnt,catCnt]
+            //             }
+            //         ]
+            //     },
+            //     options: {
+            //         title: {
+            //             display: true,
+            //             text: '현재 입양현황',
+            //             fontSize: 50
+            //         },
+                    // legend: {
+                    //     display: false,
+                    //     labels: {
+                    //         fontSize: 40 // 원하는 폰트 크기로 변경하세요
+                    //     }
+                    // },
+            //         scales: {
+            //             xAxes: [{
+            //                 ticks: {
+            //                     min: 0, // 최소값 설정
+            //                     max: 5, // 최대값 설정
+            //                     stepSize: 1, // 간격 설정
+            //                     fontSize: 20 // 원하는 폰트 크기로 변경하세요
+            //                 }
+            //             }],
+            //             yAxes: [{
+            //                 ticks: {
+            //                     fontSize: 20 // 원하는 폰트 크기로 변경하세요
+            //                 }
+            //             }]
+            //         }
+            //
+            //     }
+            // });
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <canvas id="pie-chart" width="250" height="250"></canvas>
+        <script>
+            let userCnt = $("#userCnt").val();
+            let petCnt = $("#petCnt").val();
+            let shelterCnt = $("#shelterCnt").val();
+
+            new Chart(document.getElementById("pie-chart"), {
+                type: 'pie',
+                data: {
+                    labels: ["회원 ", "보호소 ", "보호동물 "],
+                    datasets: [{
+                        label: "Population (millions)",
+                        backgroundColor: ["#3cba9f","#e8c3b9","#c45850"],
+                        data: [userCnt,shelterCnt,petCnt]
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: '회원 / 보호동물 / 보호소 등록현황',
+                        fontSize: 60
+                    },
+                    legend: {
+                        labels: {
+                            fontSize: 40 // 원하는 폰트 크기로 변경하세요
+                        }
+                    },
+                    // plugins: {
+                    //     datalabels: {
+                    //         anchor: 'center',
+                    //         align: 'center',
+                    //         font: {
+                    //             size: 20
+                    //         }
+                    //     },
+                    //     tooltips: {
+                    //         bodyFontSize: 40
+                    //     }
+                    // },
+                    tooltips: {
+                        bodyFontSize: 40,
+                        titleFontSize: 40
+                    }
+                }
+            });
+        </script>
+    </div>
+
+<!--    <div style="padding-left: 15px">-->
+<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>-->
+<!--        <canvas id="line-chart"></canvas>-->
+<!--        <script>-->
+<!--            new Chart(document.getElementById("line-chart"), {-->
+<!--                type: 'line',-->
+<!--                data: {-->
+<!--                    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],-->
+<!--                    datasets: [{-->
+<!--                        data: [86,114,106,106,107,111,133,221,783,2478],-->
+<!--                        label: "일본 엔 (JPY)",-->
+<!--                        borderColor: "#3e95cd",-->
+<!--                        fill: false-->
+<!--                    }, {-->
+<!--                        data: [282,350,411,502,635,809,947,1402,2000,3600],-->
+<!--                        label: "유로 (EUR)",-->
+<!--                        borderColor: "#8e5ea2",-->
+<!--                        fill: false-->
+<!--                    }, {-->
+<!--                        data: [168,170,178,190,203,276,408,547,675,734],-->
+<!--                        label: "영국 파운드 (GBP)",-->
+<!--                        borderColor: "#3cba9f",-->
+<!--                        fill: false-->
+<!--                    }, {-->
+<!--                        data: [40,20,10,16,24,38,74,167,508,784],-->
+<!--                        label: "스위스 프랑 (CHF)",-->
+<!--                        borderColor: "#e8c3b9",-->
+<!--                        fill: false-->
+<!--                    }, {-->
+<!--                        data: [6,3,2,2,7,26,82,172,312,433],-->
+<!--                        label: "홍콩 달러 (HKD)",-->
+<!--                        borderColor: "#c45850",-->
+<!--                        fill: false-->
+<!--                        }-->
+<!--                    ]-->
+<!--                },-->
+<!--                options: {-->
+<!--                    title: {-->
+<!--                        display: true,-->
+<!--                        text: '입양예정 내역',-->
+<!--                        fontSize: 30-->
+<!--                    },-->
+<!--                    legend: {-->
+<!--                        labels: {-->
+<!--                            fontSize: 20 // 원하는 폰트 크기로 변경하세요-->
+<!--                        }-->
+<!--                    },-->
+<!--                    tooltips: {-->
+<!--                        bodyFontSize: 20,-->
+<!--                        titleFontSize: 30-->
+<!--                    },-->
+<!--                    scales: {-->
+<!--                        yAxes: [{-->
+<!--                            ticks: {-->
+<!--                                fontSize: 15 // 원하는 폰트 크기로 변경하세요-->
+<!--                            }-->
+<!--                        }],-->
+<!--                        xAxes: [{-->
+<!--                            ticks: {-->
+<!--                                fontSize: 15 // 원하는 폰트 크기로 변경하세요-->
+<!--                            }-->
+<!--                        }]-->
+<!--                    },-->
+<!--                }-->
+<!--            });-->
+<!--        </script>-->
+<!--    </div>-->
+
+</div>
+
+<!-- 푸터 -->
+<th:block th:replace="/include/footer :: footerFrag"></th:block>
+
+</body>
+</html>
+

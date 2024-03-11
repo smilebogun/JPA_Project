@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+<div class="container shadow-sm w-75 p-5 rounded mt-5">
+    <h2 class="text-center mb-5">보호동물 조회</h2>
+
+    <div class="mb-5 mt-5">
+        <form action="/admin/searchList" name="searchForm" method="get">
+            <div class="d-flex justify-content-center">
+                <select class="form-select form-select-sm me-2" style="width:100px" name="searchSpecies">
+                    <option value="all">동물선택</option>
+                    <option value="고양이">고양이</option>
+                    <option value="강아지">강아지</option>
+                </select>
+                <select class="form-select form-select-sm me-2" style="width:100px" name="searchArea">
+                    <option value="all">지역선택</option>
+                    <option value="서울">서울</option>
+                    <option value="경기">경기도</option>
+                    <option value="강원">강원도</option>
+                    <option value="충북">충청북도</option>
+                    <option value="충남">충청남도</option>
+                    <option value="경북">경상북도</option>
+                    <option value="경남">경상남도</option>
+                    <option value="전북">전라북도</option>
+                    <option value="전남">전라남도</option>
+                </select>
+                <input type="text" id="keyword" name="keyword" placeholder="검색어 입력" style="width:300px"
+                       class="form-control rounded-0 rounded-start" value="">
+                <button class="btn rounded-0 rounded-end" style="background:#138499; color:white;"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>이미지</th>
+            <th>견/묘종</th>
+            <th>등록날짜</th>
+            <th>성별</th>
+            <th>중성화 여부</th>
+            <th>접종여부</th>
+            <th>보호소 위치</th>
+            <th>삭제</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="pet : ${list}">
+            <tr>
+                <td th:text="${pet.getNo()}"></td>
+                <!--                <td th:text="${shelter.getShelName()}"></td>-->
+                <!--                <td><img th:src="@{/fileRepo/}+${pet.getPetImage()}"  alt="" width="60px"></td>-->
+                <td><a th:href="@{/admin/petModify(no=${pet.getNo()})}"><img th:src="@{/fileRepo/}+${pet.getPetImage()}" alt="" width="60px" height="60px"></a></td>
+                <td th:text="${pet.getPetName()}"></td>
+                <td th:text="${pet.getPetSysdate()}"></td>
+                <td th:text="${pet.getPetGender()}"></td>
+                <td th:text="${pet.getPetNeutering()}"></td>
+                <td th:text="${pet.getPetInoculation()}"></td>
+                <td th:text="${pet.getShelName()}"></td>
+                <td>
+<!--                    <button class="btn btn-outline-danger btn-sm"-->
+<!--                            th:onclick="|location.href = '@{petDelete(no=${pet.getNo()})}'|">삭제</button>-->
+                    <button class="btn btn-outline-danger btn-sm"
+                            th:onclick="|deletePet(${pet.getNo()})|">삭제</button>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <!--    페이징 처리 #2-->
+    <ul class="pagination mt-5 justify-content-center">
+        <li class="page-item" th:class="${prevPage <= 0} ? 'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/admin/petList/(page=${prevPage - 1})}">이전페이지</a>
+        </li>
+        <li class="page-item" th:each="page : ${#numbers.sequence(blockStart, blockEnd)}" th:class="${page == list.number+1} ? 'page-item active':'page-item'">
+            <a class="page-link" th:text="${page}" th:href="@{/admin/petList/(page=${page - 1})}">현재페이지</a>
+        </li>
+        <li class="page-item" th:class="${blockEnd == list.totalPages} ? 'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/admin/petList/(page=${nextPage - 1})}">다음페이지</a>
+        </li>
+    </ul>
+</div>
+<script src="/js/admin/pet.js"></script>
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</body>
+</html>

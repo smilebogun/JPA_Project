@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/include/header :: headerFrag"></th:block>
+
+<!-- 컨텐츠 -->
+<!--<div class="container-fluid shadow-sm p-5 rounded mt-5">-->
+<div class="container shadow-sm rounded w-100 mt-5 p-5">
+    <h2 class="text-center mb-5">고 객  센 터</h2>
+    <ul class="nav justify-content-center">
+        <li class="nav-items me-2 ca">
+            <a th:class="${cat == '공지사항'} ? 'nav-link ca selected':'nav-link ca'" th:href="@{/SC/category/{category}(category='공지사항')}">공지사항</a>
+        </li>
+        <li class="nav-items me-2 ca">
+            <a th:class="${cat == 'F&A'} ? 'nav-link ca selected':'nav-link ca'" th:href="@{/SC/category/{category}(category='F&A')}">F & A</a>
+        </li>
+        <li class="nav-items me-2 ca">
+            <a th:class="${cat == 'Q&A'} ? 'nav-link ca selected':'nav-link ca'" th:href="@{/SC/category/{category}(category='Q&A')}">Q & A</a>
+        </li>
+    </ul>
+    <div class="mt-5 mb-5">
+        <hr class="sc-hr">
+    </div>
+    <br>
+        <div class="nav justify-content-center">
+            <div class="mt-3">
+                <button type="button" class="btn btn-secondary me-2 mb-5 FA-button" data-bs-toggle="modal" data-bs-target="#myModal1">
+                    <span>자주 물어본 질문 1</span>
+                </button>
+
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">자주 물어본 질문 1</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                자주 물어본 질문 1의 답변
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <button type="button" class="btn btn-secondary me-2 mb-5 FA-button" data-bs-toggle="modal" data-bs-target="#myModal2">
+                    자주 물어본 질문 2
+                </button>
+
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal2">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">자주 물어본 질문 2</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                자주 물어본 질문 2의 답변
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary me-2 mb-5 FA-button" data-bs-toggle="modal" data-bs-target="#myModal3">
+                    자주 물어본 질문 3
+                </button>
+
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal3">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">자주 물어본 질문 3</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                자주 물어본 질문 3의 답변
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary me-2 mb-5 FA-button" data-bs-toggle="modal" data-bs-target="#myModal4">
+                    자주 물어본 질문 4
+                </button>
+
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal4">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">자주 물어본 질문 4</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                자주 물어본 질문 4의 답변
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary me-2 mb-5 FA-button" data-bs-toggle="modal" data-bs-target="#myModal5">
+                    자주 물어본 질문 5
+                </button>
+
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal5">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">자주 물어본 질문 5</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                자주 물어본 질문 5의 답변
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary me-2 mb-5 FA-button" data-bs-toggle="modal" data-bs-target="#myModal6">
+                    자주 물어본 질문 6
+                </button>
+
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal6">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">자주 물어본 질문6</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                자주 물어본 질문 6의 답변
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary me-2 mb-5 FA-button" data-bs-toggle="modal" data-bs-target="#myModal7">
+                    자주 물어본 질문 7
+                </button>
+
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal7">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">자주 물어본 질문 7</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                자주 물어본 질문 7의 답변
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary me-2 mb-5 FA-button" data-bs-toggle="modal" data-bs-target="#myModal8">
+                    자주 물어본 질문 8
+                </button>
+
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal8">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">자주 물어본 질문 8</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                자주 물어본 질문 8의 답변
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary me-2 mb-5 FA-button" data-bs-toggle="modal" data-bs-target="#myModal1">
+                    자주 물어본 질문 9
+                </button>
+
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal9">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">자주 물어본 질문 9</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                자주 물어본 질문 9의 답변
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary me-2 mb-5 FA-button" data-bs-toggle="modal" data-bs-target="#myModal10">
+                    자주 물어본 질문 10
+                </button>
+
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal10">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">자주 물어본 질문 10</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                자주 물어본 질문 10의 답변
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5 mb-5">
+            <hr class="sc-hr">
+        </div>
+
+        <div class="text-center mt-3">
+            <a th:href="@{/SC/QARegister}" class="btn btn-success btn-lg">문의하기</a>
+        </div>
+    </div>
+
+<script src="/js/post.js">
+
+
+</script>
+<!-- 푸터 -->
+<th:block th:replace="/include/footer :: footerFrag"></th:block>
+
+</body>
+</html>

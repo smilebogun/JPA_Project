@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/include/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+
+<div class="container shadow-sm w-75 p-5 rounded mt-5">
+    <h2 class="text-center mb-5" th:text="공지사항"></h2>
+    <hr class="sc-hr">
+    <div class="form-group  mt-5 mb-2">
+        <label for="title">제목</label><br>
+        <input id=title class="form-control" th:value="${sc.scTitle}" readonly>
+    </div>
+    <th:block th:if="${sc.admin != null}">
+        <div class="form-group mb-2">
+            <label for="writerAdmin" class="form-label">작성자</label>
+            <input id ="writerAdmin" class="form-control" th:value="${sc.admin.getAdminName()}" readonly>
+        </div>
+    </th:block>
+    <div class="form-group mb-2">
+        <label for="indate" class="form-label">작성날짜</label>
+        <input id ="indate" class="form-control" th:value="${#dates.format(sc.SCIndate, 'yyyy.MM.dd')}" readonly>
+    </div>
+
+    <th:block th:if="${sc.scImage != null and sc.scImage !='null'}">
+        <div class="form-group mb-2">
+            <label for="image" class="form-label">이미지</label>
+            <div class="form-control p-5 text-center">
+                <img id="image" th:src="@{/fileRepo/}+${sc.getScImage()}"/>
+            </div>
+        </div>
+    </th:block>
+
+    <div class="form-group mb-2">
+        <label for="content" class="form-label">내용</label>
+        <textarea id="content" style="height:250px" class="form-control" th:text="${sc.scContent}" readonly>포스트내용</textarea>
+    </div>
+    <div class="text-center mt-5">
+        <button  class="btn btn-secondary" onclick="history.back()">뒤로</button>
+    </div>
+</div>
+
+<!--    <div class="mt-4">-->
+<!--        포스트 번호 : <span id="bno" th:value="${post.id}" th:text="${post.id}">포스트 아이디</span><br/>-->
+<!--        작성자 : <span><i th:text="${getPost.getUser().getUsername()}">작성자</i></span>-->
+<!--    </div>-->
+
+
+
+
+<script src="/js/admin/serviceCenter.js"></script>
+<script src="/js/reply.js"></script>
+
+
+<!-- 푸터 -->
+<th:block th:replace="/include/footer :: footerFrag"></th:block>
+
+</html>

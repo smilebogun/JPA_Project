@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+
+<div class="container shadow-sm w-75 p-5 rounded mt-3">
+    <div class="container shadow-sm w-75 p-5 rounded mt-3">
+        <input type="hidden" id="no" th:value="${admin.no}">
+        <hr>
+            <div class="mt-4 mb-4">
+                아이디 : <span th:text="${admin.adminId}">아이디</span><br/>
+                비밀번호 : <span th:text="${admin.adminPw}">비밀번호</span><br/>
+                이름 : <span th:text="${admin.adminName}">이름</span><br/>
+                전화번호 : <span th:text="${admin.adminTel}">전화번호</span><br/>
+                이메일 : <span th:text="${admin.adminEmail}">이메일</span><br/>
+                권한 : <span th:text="${admin.adminRole}">권한</span><br/>
+            </div>
+        <hr>
+        <div class="text-center mt-4">
+            <button class="btn btn-secondary me-2" onclick="history.back()">뒤로</button>
+            <a th:href="@{/admin/adminUpdate/{no}/(no=${admin.no})}" methods="put" class="btn btn-info me-2">수정</a>
+            <button id="btn-delete" class="btn btn-danger me-2">삭제</button>
+        </div>
+    </div>
+</div>
+
+<script src="/js/admin/admin.js"></script>
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</body>
+</html>

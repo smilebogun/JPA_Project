@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--헤더-->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!--컨텐츠-->
+<div class="container shadow-sm rounded w-50 mt-5 p-5">
+    <form class="form-join" name="petForm" th:action="@{/admin/petInsert}" method="post" enctype="multipart/form-data">
+        <h2 class="text-center mb-5">보호동물 등록</h2>
+        <div class="form-group mb-2">
+            <div>
+                <label for="petSpecies" class="form-label">강아지/고양이</label>
+                <select class="form-select" name="petSpecies" id="petSpecies" required>
+                    <option value="" selected="selected" disabled>동물선택</option>
+                    <option value="강아지">강아지</option>
+                    <option value="고양이">고양이</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="petName" class="form-label">견/묘종</label>
+                <input type="text" class="form-control" name="petName" id="petName" placeholder="견/묘종" required>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="petAge" class="form-label">나이</label>
+                <input type="text" class="form-control" name="petAge" id="petAge" placeholder="나이" required>
+            </div>
+        </div>
+
+
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="male" class="form-label">성별</label>
+                <div class="form-control d-flex">
+                    <div class="me-4">
+                        <input type="radio" id="male" name="petGender" value="수컷"/>
+                        <label>수컷</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="female" name="petGender" value="암컷"/>
+                        <label>암컷</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="ok" class="form-label">중성화 여부</label>
+                <div class="form-control d-flex">
+                    <div class="me-5">
+                        <input type="radio" id="ok" name="petNeutering" value="완료"/>
+                        <label>O</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="no" name="petNeutering" value="미완료"/>
+                        <label>X</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="ok2" class="form-label">접종 여부</label>
+                <div class="form-control d-flex">
+                    <div class="me-5">
+                        <input type="radio" id="ok2" name="petInoculation" value="완료"/>
+                        <label>O</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="no2" name="petInoculation" value="미완료"/>
+                        <label>X</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="petImage" class="form-label">사진</label>
+            <input type="file" class="form-control" id="petImage" name="petImage">
+        </div>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="shelArea" class="form-label">지역</label>
+                <select class="form-select" name="shelArea" id="shelArea" onchange="getShelList(this)" required>
+                    <option value="" selected="selected" disabled>지역선택</option>
+                    <option value="서울">서울</option>
+                    <option value="경기">경기도</option>
+                    <option value="강원">강원도</option>
+                    <option value="충북">충청북도</option>
+                    <option value="충남">충청남도</option>
+                    <option value="경북">경상북도</option>
+                    <option value="경남">경상남도</option>
+                    <option value="전북">전라북도</option>
+                    <option value="전남">전라남도</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="shelName" class="form-label">보호소</label>
+            <select class="form-select" name="shelName" id="shelName" required>
+                <option>지역을 먼저 선택해주세요</option>
+            </select>
+        </div>
+
+
+
+        <div class="form-group mb-2">
+            <label for="petPlace" class="form-label">발견된 장소</label>
+            <div>
+                <textarea class="form-control" name="petPlace" id="petPlace" placeholder="발견된 장소"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="petRemarks" class="form-label">특이사항</label>
+            <div>
+                <textarea class="form-control" name="petRemarks" id="petRemarks" placeholder="특이사항"></textarea>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <input type="button" onclick="inputChk()" class="btn btn-success me-2" value="보호동물 등록">
+            <input type="reset" class="btn btn-warning" value="취소">
+        </div>
+    </form>
+
+
+</div>
+<script src="/js/admin/pet.js"></script>
+
+<!--푸터-->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</html>

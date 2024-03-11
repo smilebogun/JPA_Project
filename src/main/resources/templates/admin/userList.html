@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+
+<div class="container shadow-sm rounded w-100 mt-5 p-5">
+
+    <h2 class="text-center mb-5">회원 리스트</h2>
+        <table class='table'>
+            <thead class=''>
+                <tr>
+                    <th>No</th>
+                    <th>아이디</th>
+                    <th>비밀번호</th>
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>전화번호</th>
+                    <th>이메일</th>
+<!--                    <th>우편번호</th>-->
+                    <th>주소</th>
+<!--                    <th>상세주소</th>-->
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="user : ${userList}">
+                    <tr>
+                        <td th:text="${user.getNo()}">번호</td>
+                        <td th:text="${user.getId()}">아이디</td>
+<!--                        <td><a th:href="@{/user/{no}(no=${user.no})}" th:text="${user.getId()}">아이디</a></td>-->
+                        <td th:text="${user.getPw().substring(0,15)}">비밀번호</td>
+                        <td th:text="${user.getName()}">이름</td>
+                        <td th:text="${user.getAge()}">나이</td>
+                        <td th:text="${user.getTel()}">전화번호</td>
+                        <td th:text="${user.getEmail()}">이메일</td>
+<!--                        <td th:text="${user.getZipcode()}" >우편번호</td>-->
+                        <td th:text="${user.getRoadAddr()}">주소</td>
+<!--                        <td th:text="${user.getDetailAddr()}">상세주소</td>-->
+                    </tr>
+                </th:block>
+
+            </tbody>
+        </table>
+
+    <!--페이징 처리 #2-->
+    <ul class="pagination mt-5 justify-content-center">
+        <li class="page-item" th:class="${prevPage <= 0} ? 'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/admin/userList/(page=${prevPage - 1})}">이전페이지</a>
+        </li>
+        <li class="page-item" th:each="page : ${#numbers.sequence(blockStart, blockEnd)}" th:class="${page == userList.number+1} ? 'page-item active':'page-item'">
+            <a class="page-link" th:text="${page}" th:href="@{/admin/userList/(page=${page - 1})}">현재페이지</a>
+        </li>
+        <li class="page-item" th:class="${blockEnd == userList.totalPages} ? 'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/admin/userList/(page=${nextPage - 1})}">다음페이지</a>
+        </li>
+    </ul>
+
+</div>
+<!--<script src="/js/admin/admin.js"></script>-->
+
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</body>
+</html>

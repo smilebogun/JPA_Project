@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+
+<!-- 컨텐츠 -->
+<div class="container shadow-sm w-50 p-5 rounded mt-5">
+    <h2 class="text-center mb-5">공지사항 수정하기</h2>
+    <hr class="sc-hr">
+    <form class="form-join">
+        <div class="form-group  mt-2 mb-2">
+            <input type="hidden" id="id" th:value="${sc.id}">
+            <label for="title" class="form-label" >제목</label>
+            <input type="text" class="form-control" name="title" id="title" th:value="${sc.scTitle}" required>
+        </div>
+        <div class="form-group mb-2">
+            <label class="form-label">내용</label>
+
+            <textarea style="height:250px" class="form-control" name="content" id="content" th:text="${sc.scContent}" required></textarea>
+        </div>
+
+        <div class="form-group mb-2" id="div-file">
+            <label for="image" class="form-label">이미지</label>
+            <div class="form-control mb-1">
+                <label for="image" class="form-label">기존파일</label><br>
+                <img class="ms-3 me-3 mb-1" th:src="@{/fileRepo/}+${sc.scImage}" alt="" width="60px">
+                <th:block th:text="${sc.scImage}"></th:block>
+            </div>
+            <input type="file" class="form-control form-control" id="image"/>
+        </div>
+    </form>
+    <div class="text-center mt-5">
+        <button class="btn btn-success me-2" id="btn-update">수정</button>
+        <button class="btn btn-danger" onclick="history.back()">취소</button>
+    </div>
+</div>
+
+<script src="/js/admin/serviceCenter.js"></script>
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+
+</body>
+</html>

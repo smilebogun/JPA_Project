@@ -1,0 +1,530 @@
+@charset "utf-8";
+
+/* ============================== 보건 ============================== */
+/* 구글폰트 ==> @import 대신 헤더에다가 넣음 */
+/*@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap');*/
+body h1 {
+    /*font-family: 'NotoSans', sans-serif;*/
+    /* background-color: #000; */
+    font-family: "Gamja Flower", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    /*font-weight: 400;*/
+}
+body h2 {
+    /*font-family: 'NotoSans', sans-serif;*/
+    /* background-color: #000; */
+    font-family: "Gamja Flower", sans-serif;
+    /*font-weight: 400;*/
+    font-style: normal;
+    font-weight: bold;
+}
+
+body{
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    color: #555555;
+    /*font-weight: bold;*/
+}
+/*header nav .sel_lng .lang {*/
+/*.lang {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    left: 0px;*/
+/*    top: 50%;*/
+/*    width: 2px;*/
+/*    height: 8px;*/
+/*    background-color: rgb(221, 221, 221);*/
+/*    transform: translateY(-50%);*/
+/*    line-height: 50px;*/
+/*}*/
+
+/* 헤더 네브바 */
+nav.navbar {
+    /*background: dodgerblue;*/
+    background: lightseagreen;
+    font-weight: 550;
+    height: 75px;
+    font-size: medium;
+    /*font-weight: bold;*/
+    /*font-style: italic;*/
+}
+/* 테이블 */
+thead {
+    background: #138499;
+    color: white;
+}
+td{
+    vertical-align: middle;
+}
+table a{
+    font-size: 18px;
+    font-weight: bold;
+    color: #555555;
+    text-decoration:none;   /* 밑줄 삭제 */
+}
+
+/* 카카오 버튼 */
+.kakaoIMG:hover{
+    opacity: 0.8;
+    /*transition: .1s;*/
+}
+/* 폰트 */
+.dongle-regular {
+    font-family: "Dongle", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.dongle-light {
+    font-family: "Dongle", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+.dongle-bold {
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.single-day-regular {
+    font-family: "Single Day", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* 헤드 라인 hover */
+nav .navbar-nav li a{
+    /*border: 1px solid red;*/
+    position:relative;
+    color: white;
+    /*list-style:none;   !* - 삭제 *!*/
+    /*text-decoration:none;   !* 밑줄 삭제 *!*/
+}
+
+/* before 인라인요소 : size 조정 */
+nav .navbar-nav li a::before{
+    content : '';
+    background-color: white;
+    display: inline-block;
+    height: 2px;
+    width: 0;
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    /* opacity: 0; */
+    transition: .3s;
+    transform: translateX(-50%);
+    list-style:none;   /* - 삭제 */
+    text-decoration:none;   /* 밑줄 삭제 */
+}
+
+.navbar-nav li a:hover::before{
+    /* opacity: 1; */
+    width: 90%;
+    color: white;
+}
+
+/* ============================== 보건 ============================== */
+
+/* ============================== 기존 Project ============================== */
+/*-- header --*/
+li {
+    list-style:none;   /* - 삭제 */
+}
+li a{
+    text-decoration:none;   /* 밑줄 삭제 */
+    color: #555555;
+}
+li a:hover{
+    /*text-decoration-line:underline;*/
+}
+/*-- header --*/
+
+/*-- footer --*/
+.line_none a{
+    text-decoration-line: none;
+    color: #555555;
+}
+.line_none a:hover{
+    text-deoration-line: underline;
+}
+/*-- footer --*/
+/* ============================== Project ============================== */
+
+/* ============================== 확인해야함 ============================== */
+
+/*.navbar-nav{*/
+
+/*}*/
+/*.nav-item {*/
+
+/*}*/
+
+/*.nav-link {color:white;}*/
+
+/*.nav.nav-tabs a{*/
+/*    color:#666;*/
+/*}*/
+/*.nav.nav-tabs a:hover{*/
+/*    background:#eee;*/
+/*}*/
+/* ============================== 확인해야함 ============================== */
+
+/* ============================== 확인완료 ============================== */
+.findIdPw {
+
+}
+.findIdPw .fa{
+    color: #555555;
+}
+.findIdPw a{
+    font-size: 14px;
+    color: #555;
+    text-decoration: none;
+}
+.findIdPw a:hover {
+    text-decoration: underline;
+}
+/* 아이디 - 비밀번호 */
+/*.findIdPw a+a:before{*/
+/*     content:'';*/
+/*     display:inline-block;*/
+/*     background-color:#808080;*/
+/*     width:3px;*/
+/*     height:3px;*/
+/*     vertical-align: 3px;*/
+/*     margin:0 5px;*/
+/* }*/
+
+.nav.nav-tabs a{
+    color: #666;
+}
+/* myprofile */
+.myProfile{
+    color:white;
+    text-decoration: none;
+    line-height:42px;	/* 높이 f12로 보고 절반값으로 진행하면됌  */
+}
+.myProfile:hover{
+    /* color:green; */
+    text-decoration: underline;
+    color:white;
+}
+
+#pwChkMsg{
+    color:red;
+    font-size:11px
+}
+#pwChkMsg2{
+    color:blue;
+    font-size:11px
+}
+
+/* 이메일 인증 확인 - 부트스트랩 form-control 사용안할시 CSS주기 */
+#confirmEmail{
+    /* display: none; 디스플레이는 존재가 사라짐 (자리자체가) 전부 사라지는거고 visibility는 공간은 차지하고 있음 */
+    visibility: hidden;  /* 보이지 않을뿐 공간은 차지함 */
+    height: 0;
+    /* opacity: 0; */ /* 투명하게 할뿐 자리를 차지함 */
+}
+.input-code{
+    border: 1px solid #ced4da;	/* 테두리 색상 */
+    border-radius: 6px 0 0 6px;		/* 테두리 둥글게 */
+    border-right: 0;		/* 우측 테두리 없음 */
+    padding: 6px 12px;		/* 패딩 */
+    outline: none;	/* 포커스가 갔을때 검은색 테두리 없애기 */
+    width: 70%; 	/* 높이 */
+}
+.time{
+    border: 1px solid #ced4da;	/* 테두리 색상 */
+    border-radius: 0 6px 6px 0;		/* 테두리 둥글게 */
+    border-left: 0;			/* 좌측 테두리 없음 */
+    padding: 6px 12px;		/* 패딩 */
+    outline: none;	/* 포커스가 갔을때 검은색 테두리 없애기 */
+    width: 30%; 			/* 높이 */
+    color: red;			/* 3분시간 색상 */
+    text-align: right; 	/* 다음 텍스트가 인증코드확인 버튼이 들어가게 */
+}
+.code-msg{
+    display: none;
+    font-size: 12px;
+    color: green;
+}
+/* ============================== 확인완료 ============================== */
+
+/* ============================== 경민 ============================== */
+
+/* 캐러셀(이미지슬라이드) 이미지 크기변경 */
+.carousel-inner{
+    height:600px; /* 이미지 높이 변경 */
+    width: 1296px; /* 이미지 크기 설정  */
+}
+.carousel-item{
+    height:600px; /* 이미지 높이 변경 */
+    width: 1250px; /* 이미지 크기 설정  */
+}
+.d-block {
+    display:block;
+    width: 1296px;
+    height: 600px;
+}
+
+#bar-chart-horizontal{
+    display: block;
+    width: 600px !important;
+    height: 600px !important;
+    padding-top: 30px;
+}
+#bar-chart{
+    display: block;
+    width: 600px !important;
+    height: 600px !important;
+    padding-top: 30px;
+    float: left;
+}
+#pie-chart{
+    display: block;
+    width: 600px !important;
+    height: 600px !important;
+    padding-top: 30px;
+}
+#line-chart{
+    display: block;
+    width: 1200px !important;
+    height: 600px !important;
+    padding-top: 30px;
+    /*float: left;*/
+}
+
+/* ============================== 경민 ============================== */
+
+/* ============================== 지수 ============================== */
+
+/* 펫 상세보기 페이지*/
+#petDetail{
+    width: 800px;
+    height: 300px;
+    /*font-family: "Dongle", sans-serif;*/
+    font-family: "Gamja Flower", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    /*font-family: "Single Day", cursive;*/
+    /*font-weight: 600;*/
+    /*font-style: normal;*/
+    font-size: 25px;
+    /*margin-left:auto;*/
+    /*margin-right:auto;*/
+    /*margin-top: 30px;*/
+}
+#petDetail > tbody >tr{
+    height: 50px;
+    border: 2px solid #555555;
+}
+.petTd1{
+    width: 150px;
+    text-align: center;
+    /*background-color: #666666;*/
+    background: #138499;
+    color:white;
+    font-size: 20px;
+}
+.petTd2{
+    width: 250px;
+    text-align: center;
+}
+.petTd3{
+    width: 250px;
+    height: 100px;
+    text-align: center;
+}
+
+/*@@@@@@@@@@@pet List@@@@@@@@@@@@@@*/
+/* 보여지는 가장 높은 카드 */
+.card{
+    overflow: hidden;
+    width: 250px;
+    height: 300px;
+}
+/* 허버시, 작동되는 내용(글이 올라옴) */
+.card:hover > .card-body{
+    transform: translateY(-0px);
+    /*transform: translate(-50%, -50%);*/
+    /*transition: .3s ease-in;*/
+    /*transition: .2s ease-out;*/
+    transition: .3s ease-out;
+    cursor: pointer;
+}
+/* 허버시, 어두워지고 이미지가 커짐 */
+.card:hover > .card-head{
+    filter: brightness(50%);
+    transform:scale(1.1);
+    transition: .3s ease-out;
+    /*transform: translateY(-4px);*/
+}
+.card-title{
+    /*font-family: "Dongle", sans-serif;*/
+    font-family: "Gamja Flower", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+}
+.card-text{
+    /*font-family: "Dongle", sans-serif;*/
+    font-family: "Gamja Flower", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+/* A링크 설정 */
+.petLink{
+    text-decoration: none;
+    color:white;
+}
+/* A링크 허버시 이미지에 링크 줌 */
+.petLink:hover{
+    color:white;
+}
+/* 카드의 이미지 */
+.card-head{
+    position: relative;
+    transition: .3s ease-out;
+}
+/* 카드의 내용 */
+.card-body{
+    width: 250px;
+    transform: translateY(300px);
+    position: absolute;
+    height: 300px;
+    text-align:center;
+    vertical-align: bottom;
+    transition: .3s ease-out;
+}
+/* 카드내용의 p태그 */
+/*.card-body > p{*/
+/*    font-size: 10px;*/
+/*    color: #fff;*/
+/*}*/
+
+
+/*.card{*/
+/*    position: relative;*/
+/*    width: 290px; height: 200px; margin: 5px; border-radius: 10px;*/
+/*}*/
+
+/*.card-img-top{*/
+/*    border-radius: 10px;*/
+/*}*/
+
+/*.card-head{*/
+
+/*    height: 200px;*/
+/*    width: 100%;*/
+
+/*}*/
+
+/*.card-body{*/
+/*    display: none;*/
+/*    height: 200px;*/
+/*    width: 100%;*/
+
+/*}*/
+/*.card:hover{*/
+/*    height: 400px;*/
+/*}*/
+
+/*.card:hover > .card-body{*/
+/*    display: block;*/
+/*}*/
+
+/*.card:hover{*/
+
+/*    transform: perspective(1500px) rotateY(30deg);*/
+/*    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);*/
+/*    cursor: pointer;*/
+/*}*/
+
+/* ============================== 지수 ============================== */
+
+/* ============================== 태인 ============================== */
+
+/* 댓글 리스트 */
+/*.mb-2 div{*/
+/*    cursor:pointer;*/
+/*}*/
+/*.mb-2 div:hover{*/
+/*    background:#eee;*/
+/*}*/
+div.reply{
+    background: lightslategrey; !important;
+    color: white; !important;
+}
+
+/*post*/
+li.ca{
+    /*border: 1px solid #555555;*/
+    width:200px;
+    text-align: center;
+    border-radius: 12px;
+}
+a.ca{
+    border-radius: 12px;
+    border: 1px solid #555555;
+    color: black;
+}
+.ca:hover{
+    text-decoration: none;
+    color: white;
+    border-radius: 12px;
+    background-color: #138499;
+    transition: background-color 0.5s;
+    box-shadow: none;
+}
+a.selected{
+    color: white;
+    border-radius: 12px;
+    background-color: #138499;
+}
+
+/*reply*/
+#reply-content{
+    resize: none;
+}
+#re-content{
+    background: white;
+    border: none;
+    resize: none;
+}
+/* SC */
+.sc-hr{
+    border: 0;
+    height: 3px;
+    background: #555555;
+}
+/* FA */
+.FA-button{
+    width:200px !important;
+    height:150px!important;
+    color: black;
+
+    background-color: white;
+    font-weight: bold;
+}
+.FA-button:hover{
+    background-color: #138499;
+    color: white;
+    border: none;
+    font-weight: bold;
+
+}
+.num{
+    text-align: left !important;
+}
+.modal-content{
+    width: 700px !important;
+    height: 500px !important;
+}
+
+
+/* ============================== 태인 ============================== */

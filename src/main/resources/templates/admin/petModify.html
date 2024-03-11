@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--헤더-->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!--컨텐츠-->
+<div class="container shadow-sm rounded w-50 mt-5 p-5">
+    <form class="form-join" name="petForm" th:action="@{/petModify(no=${pet.getNo()})}" method="post" enctype="multipart/form-data">
+        <h2 class="text-center mb-5">보호동물 수정</h2>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="petSpecies" class="form-label">강아지/고양이</label>
+                <select class="form-select" name="petSpecies" id="petSpecies" required>
+                    <th:block th:if="${pet.getPetSpecies() == '강아지'}">
+                    <option value="강아지" selected="selected">강아지</option>
+                    <option value="고양이">고양이</option>
+                    </th:block>
+                    <th:block th:if="${pet.getPetSpecies() != '강아지'}">
+                        <option value="강아지">강아지</option>
+                        <option value="고양이" selected="selected">고양이</option>
+                    </th:block>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="petName" class="form-label">견/묘종</label>
+                <input type="text" class="form-control" name="petName" id="petName" th:value="${pet.getPetName()}" required>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="petAge" class="form-label">나이</label>
+                <input type="text" class="form-control" name="petAge" id="petAge" th:value="${pet.getPetAge()}" required>
+            </div>
+        </div>
+
+
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="male" class="form-label">성별</label>
+                <div class="form-control d-flex">
+                    <th:block th:if="${pet.getPetGender() == '수컷'}">
+                        <div class="me-4">
+                            <input type="radio" id="male" name="petGender" checked="checked" value="수컷"/>
+                            <label>수컷</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="female" name="petGender" value="암컷"/>
+                            <label>암컷</label>
+                        </div>
+                    </th:block>
+                    <th:block th:if="${pet.getPetGender() != '수컷'}">
+                        <div class="me-4">
+                            <input type="radio" id="male" name="petGender" value="수컷"/>
+                            <label>수컷</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="female" name="petGender" checked="checked" value="암컷"/>
+                            <label>암컷</label>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="ok" class="form-label">중성화 여부</label>
+                <div class="form-control d-flex">
+                    <th:block th:if="${pet.getPetNeutering() == '완료'}">
+                    <div class="me-5">
+                        <input type="radio" id="ok" name="petNeutering" checked="checked" value="완료"/>
+                        <label>O</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="no" name="petNeutering" value="미완료"/>
+                        <label>X</label>
+                    </div>
+                    </th:block>
+                    <th:block th:if="${pet.getPetNeutering() != '완료'}">
+                        <div class="me-5">
+                            <input type="radio" id="ok" name="petNeutering" value="완료"/>
+                            <label>O</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="no" name="petNeutering" checked="checked" value="미완료"/>
+                            <label>X</label>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="ok2" class="form-label">접종 여부</label>
+                <div class="form-control d-flex">
+                    <th:block th:if="${pet.getPetInoculation() == '완료'}">
+                    <div class="me-5">
+                        <input type="radio" id="ok2" name="petInoculation" checked="checked" value="완료"/>
+                        <label>O</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="no2" name="petInoculation" value="미완료"/>
+                        <label>X</label>
+                    </div>
+                    </th:block>
+                    <th:block th:if="${pet.getPetInoculation() != '완료'}">
+                        <div class="me-5">
+                            <input type="radio" id="ok2" name="petInoculation" value="완료"/>
+                            <label>O</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="no2" name="petInoculation" checked="checked" value="미완료"/>
+                            <label>X</label>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="petImage" class="form-label">사진</label>
+            <div class="form-control mb-1">
+                <label for="petImage" class="form-label">기존파일</label><br>
+                <img class="ms-3 me-3 mb-1" th:src="@{/fileRepo/}+${pet.getPetImage()}" alt="" width="60px">
+                <th:block th:text="${pet.getPetImage()}"></th:block>
+            </div>
+            <div class="form-control">
+                <label for="petImage" class="form-label">기존파일 수정</label>
+                <input type="file" class="form-control mb-1" id="petImage" name="petImage">
+                <input type="hidden" name="petImageOld" th:value="${pet.getPetImage()}">
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="shelArea" class="form-label">지역</label>
+                <select class="form-select" name="shelArea" id="shelArea" onchange="getShelList(this)" required>
+                    <option th:value="${pet.getShelArea()}" th:text="${pet.getShelArea()}" selected="selected"></option>
+                    <option value="서울">서울</option>
+                    <option value="경기">경기도</option>
+                    <option value="강원">강원도</option>
+                    <option value="충북">충청북도</option>
+                    <option value="충남">충청남도</option>
+                    <option value="경북">경상북도</option>
+                    <option value="경남">경상남도</option>
+                    <option value="전북">전라북도</option>
+                    <option value="전남">전라남도</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="shelName" class="form-label">보호소</label>
+            <select class="form-select" name="shelName" id="shelName" required>
+                <option th:value="${pet.getShelName()}" th:text="${pet.getShelName()}" ></option>
+            </select>
+        </div>
+
+
+
+        <div class="form-group mb-2">
+            <label for="petPlace" class="form-label">발견된 장소</label>
+            <div>
+                <textarea class="form-control" name="petPlace" id="petPlace" th:text="${pet.getPetPlace()}"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="petRemarks" class="form-label">특이사항</label>
+            <div>
+                <textarea class="form-control" name="petRemarks" id="petRemarks" th:text="${pet.getPetRemarks()}"></textarea>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <input type="button" class="btn btn-success me-2" value="보호동물 수정" onclick="inputChk2()">
+            <input type="reset" class="btn btn-warning" value="취소">
+        </div>
+    </form>
+
+</div>
+<script src="/js/admin/pet.js"></script>
+
+<!--푸터-->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+<div class="container shadow-sm w-75 p-5 rounded mt-5">
+    <h2 class="text-center mb-5" style="text-align: center">보호동물 정보</h2>
+
+
+    <div style="text-align:center">
+        <img th:src="@{/fileRepo/}+${list.getPetImage()}" style="width: 400px; height: 400px; object-fit:cover;">
+    </div>
+
+    <div  class="d-flex justify-content-center mt-5">
+        <table id="petDetail" >
+            <tbody>
+            <tr>
+                <td class="petTd1">동물</td>
+                <td class="petTd2" th:text="${list.getPetSpecies()}"></td>
+                <td class="petTd1">성별</td>
+                <td class="petTd2" th:text="${list.getPetGender()}"></td>
+            </tr>
+            <tr>
+                <td class="petTd1">견/묘종</td>
+                <td class="petTd2" th:text="${list.getPetName()}"></td>
+                <td class="petTd1">나이</td>
+                <td class="petTd2" th:text="${list.getPetAge()}"></td>
+            </tr>
+            <tr>
+                <td class="petTd1">접종 여부</td>
+                <td class="petTd2" th:text="${list.getPetInoculation()}"></td>
+                <td class="petTd1">중성화 여부</td>
+                <td class="petTd2" th:text="${list.getPetNeutering()}"></td>
+            </tr>
+            <tr>
+                <td class="petTd1">보호소</td>
+                <td class="petTd2" th:text="${list.getShelName()}"></td>
+                <td class="petTd1">지역</td>
+                <td class="petTd2" th:text="${list.getShelArea()}"></td>
+            </tr>
+            <tr>
+                <td class="petTd1">발견된 장소</td>
+                <td class="petTd3" th:text="${list.getPetPlace()}"></td>
+                <td class="petTd1">특이사항</td>
+                <td class="petTd3" th:text="${list.getPetRemarks()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script src="/js/admin/adopt.js"></script>
+
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</body>
+</html>

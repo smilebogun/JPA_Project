@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+
+<!-- 컨텐츠 -->
+<div class="container shadow-sm p-5 rounded mt-5">
+    <h2 class="text-center mb-5">고 객  센 터</h2>
+    <ul class="nav justify-content-center">
+        <li class="nav-items me-2 ca">
+            <a th:class="${cat == '공지사항'} ? 'nav-link ca selected':'nav-link ca'" th:href="@{/admin/sc/category/{category}(category='공지사항')}">공지사항</a>
+        </li>
+        <li class="nav-items me-2 ca">
+            <a th:class="${cat == 'F&A'} ? 'nav-link ca selected':'nav-link ca'" th:href="@{/admin/sc/category/{category}(category='F&A')}">F & A</a>
+        </li>
+        <li class="nav-items me-2 ca">
+            <a th:class="${cat == 'Q&A'} ? 'nav-link ca selected':'nav-link ca'" th:href="@{/admin/sc/category/{category}(category='Q&A')}">Q & A</a>
+        </li>
+    </ul>
+
+    <div class="mb-5 mt-5">
+        <form action="/SC/searchList" name="searchForm" method="get">
+
+            <div class="d-flex justify-content-center mt-3">
+                <select class="form-select form-select-sm me-2" style="width:150px" name="searchCategory">
+                    <option value="all">제목+내용</option>
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                </select>
+                <input type="text" id="keyword" name="keyword" placeholder="검색어입력" style="width:300px"
+                       class="form-control rounded-0 rounded-start" value="">
+                <button class="btn rounded-0 rounded-end" style="background:#138499; color:white;"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+    <!--    <hr class="sc-hr">-->
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>등록일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="sc : ${scList}">
+            <tr class="">
+                <td class="col-2" th:text="${sc.id}">index</td>
+                <!--                        <td th:text="${sc.scCategory}">category</td>-->
+                <td><a class="col-8" th:href="@{/admin/scGet/{id}(id=${sc.id})}" th:text="${sc.scTitle}">title</a></td>
+                <td class= "col-2" id="indate" th:text="${#dates.format(sc.SCIndate, 'yyyy.MM.dd')}">updateTime</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <div class="text-center mt-5">
+        <a th:href="@{/admin/scRegister}" class="btn btn-success">공지사항 작성</a>
+    </div>
+    <th:block th:if="${scList.totalPages != 0}">
+        <ul class="pagination mt-5 justify-content-center">         <!--/?page=2 -->
+            <li class="page-item" th:class="${prevPage<=0} ? 'page-item disabled':'page-item'">
+                <a class="page-link" th:href="@{/SC/searchList/?searchCategory=${searchCategory}&keyword=${keyword}&page=${prevPage - 1}}">이전페이지</a>
+            </li>
+            <li class="page-item" th:each="page : ${#numbers.sequence(blockStart,blockEnd)}"
+                th:class="${page == scList  .number + 1 } ? 'page-item active':'page-item'"
+                th:if="${scList != null}">
+                <a class="page-link" th:text="${page}" th:href="@{/SC/searchList/?searchCategory=${searchCategory}&keyword=${keyword}&page=${page - 1}}">현재 페이지 블럭</a>
+            </li>
+            <li class="page-item" th:class="${blockEnd == scList.totalPages} ? 'page-item disabled':'page-item'">
+                <a class="page-link" th:href="@{/SC/searchList/?searchCategory=${searchCategory}&keyword=${keyword}&page=${nextPage - 1}}">다음페이지</a>
+            </li>
+        </ul>
+    </th:block>
+</div>
+
+<script src="/js/post.js">
+
+
+</script>
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+
+<div class="container shadow-sm w-75 p-5 rounded mt-5">
+
+    <h2 class="text-center mb-5">입양 확정리스트</h2>
+    <table class='table'>
+        <thead class=''>
+        <tr>
+            <th>번호</th>
+            <th>입양 완료된 동물</th>
+            <th>입양된 날짜</th>
+            <th>입양한 유저</th>
+            <th>이메일</th>
+            <th>번호</th>
+            <!--                    <th>UserId</th>-->
+            <!--                    <th>UserName</th>-->
+            <!--                    <th>UserTel</th>-->
+            <!--                    <th>UserEmail</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="adopt : ${list}">
+            <tr>
+                <td th:text="${adopt.getNo()}">번호</td>
+                <td>                           <!--Get 쿼리스트링 방식-->
+                    <a th:href="@{/admin/backupAdoptListPet(no=${adopt.getNo()})}">
+                        <img th:src="@{/fileRepo/}+${adopt.getPetImage()}" alt="" width="60px" height="60px"></a>
+                </td>
+                <td th:text="${#dates.format(adopt.getAdoptUpdateDate(), 'yyyy.MM.dd')}">입양된 날짜</td>
+                <td th:text="${adopt.getUserId()}">입양한 유저</td>
+                <td th:text="${adopt.getUserEmail()}">이메일</td>
+                <td th:text="${adopt.getUserTel()}">번호</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+
+    <!--    페이징 처리 #2-->
+    <ul class="pagination mt-5 justify-content-center">
+        <li class="page-item" th:class="${prevPage <= 0} ? 'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/admin/backupAdoptList/(page=${prevPage - 1})}">이전페이지</a>
+        </li>
+        <li class="page-item" th:each="page : ${#numbers.sequence(blockStart, blockEnd)}" th:class="${page == list.number+1} ? 'page-item active':'page-item'">
+            <a class="page-link" th:text="${page}" th:href="@{/admin/backupAdoptList/(page=${page - 1})}">현재페이지</a>
+        </li>
+        <li class="page-item" th:class="${blockEnd == list.totalPages} ? 'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/admin/backupAdoptList/(page=${nextPage - 1})}">다음페이지</a>
+        </li>
+    </ul>
+
+</div>
+
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/include/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+
+<div class="container shadow-sm w-75 p-5 rounded mt-5">
+
+        <h2 class="text-center mb-5">나의 입양 신청리스트</h2>
+        <table class='table'>
+            <thead class=''>
+                <tr>
+<!--                    <th>No</th>-->
+                    <th>PetNo</th>
+                    <th>PetImage</th>
+                    <th>PetName</th>
+                    <th>지역</th>
+                    <th>보호소 이름</th>
+                    <th>입양신청날짜</th>
+                    <!--<th>UserCount</th>-->
+                    <th>입양신청취소</th>
+<!--                    <th>UserId</th>-->
+<!--                    <th>UserName</th>-->
+<!--                    <th>UserTel</th>-->
+<!--                    <th>UserEmail</th>-->
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="adopt : ${adoptList}">
+                    <tr>
+                        <th:block th:if="${session.principal.getNo() == adopt.getUserNo() && adopt.getAdoptStatus() == '1'}">
+                            <!--<td th:text="${adopt.getNo()}">No</td>-->
+                            <td th:text="${adopt.getPetNo()}">PetNo</td>
+                            <td>                           <!--Get 쿼리스트링 방식-->
+                                <a th:href="@{/user/petDetail2(no=${adopt.getNo()})}">
+                                    <img th:src="@{/fileRepo/}+${adopt.getPetImage()}" alt="" width="60px" height="60px"></a>
+                            </td>
+                            <td th:text="${adopt.getPetName()}">PetName</td>
+                            <td th:text="${adopt.getShelArea()}">지역</td>
+                            <td th:text="${adopt.getShelName()}">보호소 이름</td>
+                            <td th:text="${adopt.getAdoptCreateDate()}">등록시간</td>
+                            <!--<td th:text="${adopt.getAdoptCnt()+'명 신청 중'}">AdoptCnt</td>-->
+                            <td>
+                                <!--<a th:href="@{/user/adoptDelete(no=${adopt.getNo})}" class="btn btn-sm btn-danger">입양신청취소</a>-->
+                                <a th:onclick="|deleteAdopt(${adopt.getNo()})|" class="btn btn-sm btn-danger">입양신청취소</a>
+                            </td>
+                        </th:block>
+                    </tr>
+
+                </th:block>
+            </tbody>
+        </table>
+</div>
+
+<script>
+    function deleteAdopt(no){
+        if(confirm("정말로 입양신청을 취소하시겠습니까?")){
+            location = "/user/adoptDelete?no="+no;
+        }else{
+            return false;
+        }
+    }
+</script>
+
+<!-- 푸터 -->
+<th:block th:replace="/include/footer :: footerFrag"></th:block>
+</body>
+</html>

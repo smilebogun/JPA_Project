@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+
+<div class="container shadow-sm w-75 p-5 rounded mt-5">
+
+        <h2 class="text-center mb-5">관리자 리스트</h2>
+        <table class='table'>
+            <thead class=''>
+                <tr>
+                    <th>No</th>
+                    <th>아이디</th>
+                    <th>비밀번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>이메일</th>
+                    <th>권한</th>
+<!--                    <th>우편번호</th>-->
+<!--                    <th>주소</th>-->
+<!--                    <th>상세주소</th>-->
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="admin : ${adminList}">
+                    <tr>
+                        <td th:text="${admin.getNo()}">아이디</td>
+                        <!--<td><a th:href="@{/admin/{no}(no=${admin.no})}" th:text="${admin.getAdminId()}">아이디</a></td>-->
+                        <td><a th:href="@{/admin/{no}(no=${admin.no})}" th:text="${admin.getAdminId()}">아이디</a></td>
+                        <td th:text="${admin.getAdminPw().substring(0,15)}">비밀번호</td>
+                        <td th:text="${admin.getAdminName()}">이름</td>
+                        <td th:text="${admin.getAdminTel()}">전화번호</td>
+                        <td th:text="${admin.getAdminEmail()}">이메일</td>
+                        <td th:text="${admin.getAdminRole()}">권한</td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    <!--페이징 처리 #2-->
+    <ul class="pagination mt-5 justify-content-center">
+        <li class="page-item" th:class="${prevPage <= 0} ? 'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/admin/adminList/(page=${prevPage - 1})}">이전페이지</a>
+        </li>
+        <li class="page-item" th:each="page : ${#numbers.sequence(blockStart, blockEnd)}" th:class="${page == adminList.number+1} ? 'page-item active':'page-item'">
+            <a class="page-link" th:text="${page}" th:href="@{/admin/adminList/(page=${page - 1})}">현재페이지</a>
+        </li>
+        <li class="page-item" th:class="${blockEnd == adminList.totalPages} ? 'page-item disabled':'page-item'">
+            <a class="page-link" th:href="@{/admin/adminList/(page=${nextPage - 1})}">다음페이지</a>
+        </li>
+    </ul>
+
+
+
+</div>
+
+<script src="/js/admin/admin.js"></script>
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</body>
+</html>

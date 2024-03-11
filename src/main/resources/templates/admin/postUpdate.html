@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+
+<!-- 컨텐츠 -->
+<div class="container shadow-sm w-50 p-5 rounded mt-5">
+    <h2 class="text-center mb-5">게시판 수정하기</h2>
+    <hr class="sc-hr">
+        <div class="form-group mt-5 mb-2">
+            <label for="category" class="form-label">카테고리</label>
+            <select class="form-select me-2" name="category" id="category" style="width:200px">
+                <option value="자유 게시판" th:selected="('자유 게시판' == ${post.getPostCategory()})">자유 게시판</option>
+                <option value="찾습니다" th:selected="('찾습니다' == ${post.getPostCategory()})">찾습니다</option>
+                <option value="우리 이제 함께에요" th:selected="('우리 이제 함께에요' == ${post.getPostCategory()})">우리 이제 함께에요</option>
+                <option value="너와 나 그리고 우리" th:selected="('너와 나 그리고 우리' == ${post.getPostCategory()})">너와 나 그리고 우리</option>
+            </select>
+        </div>
+
+        <div class="form-group mb-2">
+            <label class="form-label">제목</label>
+            <input type="text" class="form-control" name="title" id="title" th:value="${post.postTitle}" required>
+            <input type="hidden" id="bno" th:value="${post.id}">
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="content" class="form-label">내용</label>
+            <textarea style="height:250px" class="form-control" name="content" id="content" th:text="${post.getPostContent()}" required></textarea>
+        </div>
+
+        <div class="form-group mb-2" id="div-file">
+            <label for="image" class="form-label">이미지</label>
+            <div class="form-control mb-1">
+                <label for="image" class="form-label">기존파일</label><br>
+                <img class="ms-3 me-3 mb-1" th:src="@{/fileRepo/}+${post.getPostImage1()}" alt="" width="60px">
+                <th:block th:text="${post.getPostImage1()}"></th:block>
+            </div>
+            <div class="form-control">
+                <label for="image" class="form-label">기존파일 수정</label>
+                <input type="file" class="form-control mb-1" id="image" multiple/>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <button class="btn btn-info me-2" id="update">수정</button>
+            <button class="btn btn-danger" onclick="history.back()">취소</button>
+        </div>
+
+</div>
+
+<script src="/js/admin/adminPost.js"></script>
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+
+</body>
+</html>

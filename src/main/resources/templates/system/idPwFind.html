@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="/include/header :: headerFrag"></th:block>
+
+<!-- 컨텐츠 -->
+<div class="container shadow-sm w-50 p-5 rounded mt-5">
+    <h2 class="text-center mb-5">아이디 & 비밀번호 찾기</h2>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">           <!--th:class를 class로 대체하겠다-->
+            <a class="nav-link" th:class="${find == 'id' ? 'nav-link active':'nav-link'}"
+               data-bs-toggle="tab" href="#menu1">아이디 찾기</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:class="${find == 'pw' ? 'nav-link active':'nav-link'}"
+               data-bs-toggle="tab" href="#menu2">비밀번호 찾기</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content mt-3">
+        <!-- 아이디 패널 -->
+<!--        <div id="menu1" class="container tab-pane fade ${find == 'id' ? 'show active':''}"><br>-->
+        <div id="menu1" class="container tab-pane fade" style="font-weight: bold"
+             th:class="${find == 'id' ? 'container tab-pane fade show active':'container tab-pane fade'}"><br>
+            <div id="findIdBefore" class="text-center">
+                <p>이름과 전화번호를 입력하세요.</p>
+                <input class="form-control mt-4 mb-3" type="text" id="name" name="name" placeholder="이름"/>
+                <input class="form-control mb-4" type="text" id="tel" name="tel" placeholder="전화번호"/>
+                <input class="btn btn-success mt-3 w-50" type="button" value="아이디 찾기" onclick="idFind()"/>
+            </div>
+            <div id="findIdSuccess" class="text-center mt-4 mb-4" style="display:none">
+                <p class="text-center">가입시 아이디는 <b><span id="findId"></span></b> 입니다.</p>
+                <a href="/memberLogin.do" class="btn btn-success mt-4 w-50" type="button">로그인</a>
+            </div>
+        </div>
+        <!-- 비밀번호 패널 -->
+        <!--<div id="menu2" class="container tab-pane fade ${find == 'pw' ? 'show active':''}"><br>-->
+        <div id="menu2" class="container tab-pane fade" style="font-weight: bold"
+             th:class="${find == 'pw' ? 'container tab-pane fade show active':'container tab-pane fade'}"><br>
+            <div id="findPwBefore" class="text-center">
+                <p>가입시 아이디와 이메일을 입력하시오.</p>
+                <input class="form-control mt-4 mb-3" type="text" id="id" name="id" placeholder="아이디"/>
+                <input class="form-control mb-4" type="text" id="email" name="email" placeholder="이메일"/>
+                <p id="chkEmail" class="mb-2"></p>
+                <input class="btn btn-success mt-3 w-50" type="button" value="비밀번호 찾기" onclick="pwFind()"/>
+            </div>
+            <div id="findPwSuccess" class="text-center mt-4 mb-4" style="display:none">
+                <p>
+                    <small>해당 이메일로 임시 비밀번호를 보냈습니다.<br>로그인 후에 마이페이지에서 비밀번호를 재설정 해주세요.</small>
+                </p>
+                <a href="/memberLogin.do" class="btn btn-success mt-3 w-50" type="button">로그인</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function idFind(){
+            let name = $("#name").val();
+            let tel = $("#tel").val();
+            if(name == 0){
+                alert("이름을 확인해주세요.")
+                $("#name").val("");
+                $("#name").select();
+                tel = $("#tel").val("");
+            }
+            $.ajax({
+                url : "/findId.do?tel="+tel,
+                //url : "<c:url value='/findId.do?name='/>"+name+"&tel="+tel,
+                type: "post",
+                success: function(data){		// 여기서 data는 /findId.do의 반환값, 즉 서버에서 전송된 id 값
+                    console.log(data)	// 빈공백 ""으로 전송됌 ->  콘솔에서는 String으로 찍혀서 findId: null / ##findId: null로 확인됌
+                    if(data.no == 0 || data.name != name){		// java에서는 false == 0 == '' 3개는 같음 // null은 다름 // if data == null 이 조건이 SQL에서 id not null 이기때문에 조건성립이 안된다.
+                        // data.no == 0 에 null 값들이 들어가 있음 (auto_increment 특징)
+                        console.log("fail")
+                        alert("이름 및 전화번호를 다시 확인하세요")
+                    } else {	// 아이디 찾기 성공
+                        console.log("success")
+                        $("#findIdBefore").css("display", "none");
+                        $("#findIdSuccess").css("display", "block");
+                        $("#findId").text(data.id);  // id findId" text를 data로 변경
+                    }
+                },
+                error: function(){alert("아이디 찾기 실패")}
+            });
+        }
+
+        function pwFind(){
+            let id = $("#id").val();
+            let email = $("#email").val();
+            $("#chkEmail").text("이메일 전송 중...");
+            $("#chkEmail").css({"color":"blue", "font-size":"13px"})
+            $.ajax({
+                url : "/findPw.do?id="+id+"&email="+email,
+                type: "post",
+                success: function(data){		// 여기서 data는 /findId.do의 반환값, 즉 서버에서 전송된 id 값
+                    console.log(data)	// 빈공백 ""으로 전송됌 ->  콘솔에서는 String으로 찍혀서 findId: null / ##findId: null로 확인됌
+                    if(data.no == 0 || data.status === 500){		// java에서는 false == 0 == '' 3개는 같음 // null은 다름 // if (data == null) 이 조건이 SQL에서 id = not null 이기때문에 조건성립이 안된다.
+                        console.log("fail")
+                        alert("아이디와 이메일을 다시 확인하세요")
+                        $("#chkEmail").text("이메일 전송 실패!!");
+                        $("#chkEmail").css({"color":"red", "font-size":"13px"})
+                    } else {	// 비밀번호 찾기 성공
+                        console.log("success")
+                        $("#findPwBefore").css("display", "none");
+                        $("#findPwSuccess").css("display", "block");
+                    }
+                },
+                error: function(){alert("비밀번호 찾기 실패")}
+            });
+        }
+    </script>
+
+</div>
+
+<th:block th:replace="/include/footer :: footerFrag"></th:block>
+</body>
+</html>

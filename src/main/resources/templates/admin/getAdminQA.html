@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+
+<!-- 컨텐츠 -->
+<div class="container shadow-sm w-75 p-5 rounded mt-5">
+    <input type="hidden" id="id" th:value="${qa.getId()}">
+    <h2 class="text-center mb-5" th:text="${qa.user.getName()}+'님의 문의 사항'"></h2>
+    <hr class="sc-hr">
+    <div class="form-group  mt-5 mb-2">
+        <label for="title" class="form-label">제목</label><br>
+        <input id=title class="form-control" th:value="${qa.qaTitle}" readonly>
+    </div>
+    <div class="form-group mb-2">
+        <label for="indate" class="form-label">작성날짜</label>
+        <input id ="indate" class="form-control" th:value="${#dates.format(qa.getQaIndate(), 'yyyy.MM.dd')}" readonly>
+    </div>
+
+
+    <div class="form-group mb-2">
+        <label for="content" class="form-label">내용</label>
+        <textarea id="content" style="height:250px" class="form-control" th:text="${qa.qaContent}" readonly>포스트내용</textarea>
+    </div>
+    <div class="text-center mt-5 mb-5">
+        <button  class="btn btn-secondary me-2" onclick="history.back()">뒤로</button>
+        <a th:href="@{/admin/deleteQA/{id}(id=${qa.id})}" class="btn btn-danger">삭제</a>
+    </div>
+    <hr class="sc-hr">
+    <!-- 댓글 목록-->
+    <div class="container w-75 mt-5">
+        <h5 class="mt-5 mb-2"><i class="fa fa-comments-o">&nbsp;&nbsp;</i>댓글</h5>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>내용</th>
+                <th>작성자</th>
+                <th>삭제/수정</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="reply : ${qa.getQaReplyList()}">
+
+
+                <tr th:name="${reply.id}">
+                    <td>
+                        <input type="hidden" th:value="${reply.id}" id="rno">
+                        <textarea id="re-content" th:name="${reply.id}" th:text="${reply.getQAReplyContent()}" rows="1" disabled>내용</textarea></td>
+                    <!--                <td th:text="${reply.getUser().}">작성자</td>-->
+                    <th:block th:if="${reply.user !=null}">
+                        <td th:text="${reply.user.name}"></td>
+                    </th:block>
+                    <th:block th:if="${reply.admin !=null}">
+                        <td th:text="${reply.admin.adminName}"></td>
+                    </th:block>
+                    <td>
+                        <th:block th:if="${session.principal == reply.user}">
+                            <button class="btn btn-outline-info btn-sm" th:name="${reply.id}" id="re-update" th:onclick="|QAReplyObject.QAUpdate(${reply.id})|">
+                                수정
+                            </button>
+                            <button class="btn btn-outline-info btn-sm" th:name="${reply.id}+'a'" th:value="${reply.id}" id="rpl-update" th:onclick="|QAReplyObject.updateAdminQAReply(${reply.id},${qa.id})|" hidden="hidden">
+                                수정완료
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm" th:onclick="|QAReplyObject.deleteAdminQAReply(${reply.id},${qa.id})|">
+                                삭제
+                            </button>
+                        </th:block>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+        <!-- 댓글 입력 -->
+        <th:block >
+            <div class="d-flex justify-content-center mt-5">
+                <textarea id="QAReply-content" rows="2" class="form-control me-2" style="width: 500px"></textarea>
+                <button id="btn-save-adminQAReply" class="btn btn-success">
+                    댓글등록</button>
+            </div>
+        </th:block>
+    </div>
+</div>
+
+<script src="/js/post.js"></script>
+<script src="/js/QAReply.js"></script>
+
+
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+
+</html>

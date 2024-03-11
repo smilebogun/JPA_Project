@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+
+<div class="container shadow-sm w-75 p-5 rounded mt-5">
+    <input type="hidden" id="bno" th:value="${post.getId()}">
+    <h2 class="text-center mb-5" th:text="${post.getPostCategory()}"></h2>
+    <hr class="sc-hr">
+    <div class="form-join">
+        <div class="form-group  mt-5 mb-2">
+            <label for="title">제목</label><br>
+            <input id=title class="form-control" th:value="${post.getPostTitle()}" readonly>
+        </div>
+        <th:block th:if="${post.user != null}">
+            <div class="form-group mb-2">
+                <label for="writerUser" class="form-label">작성자</label>
+                <input id ="writerUser" class="form-control" th:value="${post.user.name}" readonly>
+            </div>
+        </th:block>
+        <th:block th:if="${post.admin != null}">
+            <div class="form-group mb-2">
+                <label for="writerAdmin" class="form-label">작성자</label>
+                <input id ="writerAdmin" class="form-control" th:value="${post.admin.getAdminName()}" readonly>
+            </div>
+        </th:block>
+        <div class="form-group mb-2">
+            <label for="indate" class="form-label">작성날짜</label>
+            <input id ="indate" class="form-control" th:value="${#dates.format(post.postIndate, 'yyyy.MM.dd')}" readonly>
+        </div>
+
+        <th:block th:if="${post.getPostImage1() != null and post.getPostImage1() !='null'}">
+            <div class="form-group mb-2">
+                <label for="image" class="form-label">이미지</label>
+                <div class="form-control p-5 text-center">
+                    <img id="image" th:src="@{/fileRepo/}+${post.getPostImage1()}"/>
+                </div>
+            </div>
+        </th:block>
+
+        <div class="form-group mb-2">
+            <label for="content" class="form-label">내용</label>
+            <textarea id="content" style="height:250px" class="form-control" th:text="${post.getPostContent()}" readonly>포스트내용</textarea>
+        </div>
+        <!--    <th:block th:if="${getPost.getUser().getUsername() == session.principal.username}">-->
+        <div class="text-center mt-3 mb-5">
+            <th:block th:if="${session.principal == post.user || #authentication.principal == post.admin}">
+                <a th:href="@{/admin/post/{bno}(bno=${post.id})}" id="" class="btn btn btn-info me-2">수정</a>
+            </th:block>
+            <button id="post-del" class="btn btn btn-danger me-2">삭제</button>
+            <button  class="btn btn btn-secondary" onclick="history.back()">뒤로</button>
+        </div>
+        <!--    </th:block>-->
+        <hr class="sc-hr">
+        <!-- 댓글 목록-->
+        <div class="container w-75">
+            <h5 class="mt-5 mb-2"><i class="fa fa-comments-o">&nbsp;&nbsp;</i>댓글</h5>
+            <table class="table rounded">
+
+                <thead class="reply">
+                <tr>
+                    <th class="col-7">내용</th>
+                    <th class="col-2">작성자</th>
+                    <th class="col-3">삭제/수정</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="reply : ${post.getReplyList()}">
+
+
+                    <tr th:name="${reply.id}">
+                        <td class="col-7">
+                            <input type="hidden" th:value="${reply.id}" id="rno">
+
+                            <textarea id="re-content" th:name="${reply.id}" th:text="${reply.replyContent}" rows="1" disabled>내용</textarea></td>
+                        <!--                <td th:text="${reply.user.username}">작성자</td>-->
+                        <th:block th:if="${reply.user !=null}">
+                            <td class="col-2" th:text="${reply.user.name}"></td>
+                        </th:block>
+                        <th:block th:if="${reply.admin !=null}">
+                            <td class="col-2" th:text="${reply.admin.adminName}"></td>
+                        </th:block>
+                        <td class="col-3">
+                            <th:block th:if="${#authentication.principal == reply.admin}">
+                                <button class="btn btn-outline-info btn-sm me-2" th:name="${reply.id}" id="re-update" th:onclick="|replyObject.update(${reply.id})|">
+                                    수정
+                                </button>
+                                <button class="btn btn-outline-info btn-sm me-2" th:name="${reply.id}+'a'" th:value="${reply.id}" id="rpl-update" th:onclick="|replyObject.updateAdminReply(${reply.id},${post.id})|" hidden="hidden">
+                                    수정완료
+                                </button>
+                            </th:block>
+                            <button class="btn btn-outline-danger btn-sm" th:onclick="|replyObject.deleteAdminReply(${reply.id},${post.id})|">
+                                삭제
+                            </button>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+                <!-- 댓글 입력 -->
+
+            </table>
+
+            <div class="d-flex justify-content-center mt-5">
+                <textarea id="reply-content" rows="2" class="form-control me-2" style="width: 500px"></textarea>
+                <button id="btn-save-adminReply" class="btn btn-success">
+                    댓글등록</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/admin/adminPost.js"></script>
+<script src="/js/reply.js"></script>
+
+
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+
+</html>

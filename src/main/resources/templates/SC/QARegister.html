@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/include/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+<div class="container shadow-sm w-50 p-5 rounded mt-5">
+    <h2 class="text-center mb-5" style="text-align: center">문의 하기</h2>
+    <hr class="sc-hr">
+    <form class="form-join">
+        <div class="form-group mt-5 mb-2">
+        <label for="title" class="form-label">제목</label>
+            <input type="text" class="form-control" name="title" id="title" placeholder="문의사항 제목 작성 (~30)" required>
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="content" class="form-label">내용</label>
+            <textarea style="height:250px" class="form-control" name="content" id="content" placeholder="문의 내용 작성(~1000)" required></textarea>
+        </div>
+    </form>
+        <div class="text-center mt-5">
+            <button class="btn btn-success me-2" id="register">등록</button>
+            <button class="btn btn-danger" onclick="history.back()">취소</button>
+        </div>
+</div>
+<script src="/js/QA.js"></script>
+<!-- 푸터 -->
+<th:block th:replace="/include/footer :: footerFrag"></th:block>
+
+</body>
+</html>

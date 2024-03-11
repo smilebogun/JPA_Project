@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+
+<div class="container shadow-sm w-50 p-5 rounded mt-5">
+    <h2 class="text-center" th:text="${exception}">예외문구</h2><br>
+    <h1 class="text-center">
+        <span class="text-danger" th:text="${adminId}"/> 님은 접근 권한이 없습니다!!
+    </h1>
+
+</div>
+
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</body>
+</html>

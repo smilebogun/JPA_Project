@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!-- 컨텐츠 -->
+
+<div class="container shadow-sm w-50 p-5 rounded mt-5">
+        <p class="text-center" th:if="${param.error}">
+            <span class="text-danger " th:text="${exception}">경고문구</span>
+        </p>
+    <form class="form-signin" th:action="@{/admin/login}" method="post">
+        <input type="hidden" th:value="secretData" name="secret_key">
+
+        <h2 class="text-center mb-4">관리자 로그인</h2>
+        <div class="form-group mb-3">
+            <label for="adminId" class="form-label">Admin_Id</label>
+            <input type="text" class="form-control" name="adminId" id="adminId" placeholder="Admin_Id" required>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="adminPw" class="form-label">Admin_Password</label>
+            <input type="password" class="form-control" name="adminPw" id="adminPw" placeholder="Admin_Password" required>
+        </div>
+
+        <div class="text-center pt-4">
+            <!--<input type="submit" id="btn-login" class="btn btn-primary w-100" value="로그인"/>-->
+            <input type="submit" id="btn-login" class="btn btn-success w-50" value="로그인"/>
+        </div>
+    </form>
+
+</div>
+<!--<script src="/js/admin/adminlogin.js"></script>-->
+
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+</body>
+</html>

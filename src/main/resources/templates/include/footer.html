@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" href="/css/main.css" rel="stylesheet">
+<th:block th:fragment="footerFrag">
+    <footer class="footer border-top container mt-5 p-3 d-flex">
+  <span style="font-size:15px" class="line_none">
+         <a href="#">회사소개 |</a>
+         <a href="#">이용약관 |</a>
+         <a href="#">개인정보처리방침 |</a>
+         <a href="#">고객센터</a>
+      <br/>
+    <div style="float: right">
+      &copy; Powered by Academy.
+    </div>
+  </span>
+        <br/>
+        <div class="ms-auto d-flex">
+            <ul style="list-style: none" class="line_none">
+                <li>관련사이트 : </li>
+                <li><a href="https://animal.go.kr">국가동물보호정보시스템</a></li>
+                <li><a href="https://dmanimal.co.kr/">도그마루 보호소</a></li>
+            </ul>
+            <ul style="list-style: none" class="line_none">
+                <li>고객센터 : 02 - 0000 - 0000</li>
+                <li>평일(공휴일 제외)10:00~18:00</li>
+                <li>점심시간 12:00~13:00</li>
+                <li>고객지원팀 : cs@test.co.kr</li>
+            </ul>
+        </div>
+    </footer>
+</th:block>

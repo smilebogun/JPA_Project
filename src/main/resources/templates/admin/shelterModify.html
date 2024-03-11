@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--헤더-->
+<th:block th:replace="/inc/header :: headerFrag"></th:block>
+<!--컨텐츠-->
+<div class="container shadow-sm w-50 p-5 rounded mt-4">
+    <form class="form-join">
+        <h2 class="text-center mb-5">보호소 수정</h2>
+
+        <input type="hidden" id="no" th:value="${shelter.no}"/>
+        <div class="form-group mb-2">
+            <div>
+                <label for="shel_name" class="form-label">보호소 이름</label>
+                <input type="text" class="form-control" name="shel_name" id="shel_name" th:value="${shelter.shelName}" required>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="shel_area" class="form-label">지역</label>
+                <select class="form-select" name="shelterJoinBox" id="shel_area" required>
+                    <option th:value="${shelter.shelArea}" th:text="${shelter.shelArea}" selected="selected"></option>
+                    <option value="서울">서울</option>
+                    <option value="경기">경기도</option>
+                    <option value="강원">강원도</option>
+                    <option value="충북">충청북도</option>
+                    <option value="충남">충청남도</option>
+                    <option value="경북">경상북도</option>
+                    <option value="경남">경상남도</option>
+                    <option value="전북">전라북도</option>
+                    <option value="전남">전라남도</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group mb-2">
+            <div>
+                <label for="shel_tel" class="form-label">전화번호</label>
+                <input type="text" class="form-control" name="shel_tel" id="shel_tel" th:value="${shelter.shelTel}" required>
+            </div>
+        </div>
+
+        <!----------------- 주소 ---------------------->
+        <div class="form-group mb-2">
+            <div class="row">
+                <label for="sample6_postcode" class="form-label">주소</label><br>
+                <div class="col-md-6">
+                    <input class="form-control mb-2" type="text" id="sample6_postcode"
+                           name="zipcode" th:value="${shelter.shelPostcode}">
+                </div>
+                <div class="col-md-6 p-0">
+                    <input class="btn btn-secondary mb-2" type="button" onclick="sample6_execDaumPostcode()"
+                           value="우편번호 찾기">
+                </div>
+            </div>
+
+            <input class="form-control mb-2" type="text" id="sample6_address" name="road_addr" th:value="${shelter.shelAddress}">
+            <input class="form-control mb-2" type="text" id="sample6_detailAddress" name="detail_addr" th:value="${shelter.shelDetailAddress}">
+        </div>
+
+
+
+        <!--<div class="form-group mb-2">
+            <div>
+                <textarea class="form-control" name="content" id="content" placeholder="상세주소"></textarea>
+            </div>
+        </div>-->
+
+
+    </form>
+
+    <div class="text-center mt-5">
+        <button id="btn-update" class="btn btn-success me-2">수정하기</button>
+        <input type="reset" id="shelterRegisterReset" class="btn btn-warning" value="취소">
+    </div>
+</div>
+
+<script>
+    $("#shelterRegisterReset").on("click", function() {
+        $("#shel_name").val("");
+        $("#shel_area").val("");
+        $("#shel_tel").val("");
+        $("#sample6_postcode").val("");
+        $("#sample6_address").val("");
+        $("#sample6_detailAddress").val("");
+    });
+</script>
+
+<!--푸터-->
+<th:block th:replace="/inc/footer :: footerFrag"></th:block>
+<script src="/t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/js/admin/shelter.js"></script>
+
+</html>
