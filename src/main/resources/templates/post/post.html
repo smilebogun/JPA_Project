@@ -72,7 +72,8 @@
 
         <th:block th:each="userPost : ${userList}">
             <th:block th:if="${userPost.postTemp} == 0">
-                <tr class="" th:onclick="|location.href='@{/post/get/{Bno}(Bno=${userPost.id})}'|">
+                <!--<tr class="" th:onclick="|location.href='@{/post/get/{Bno}(Bno=${userPost.id})}'|">-->
+                <tr class="">
                     <td th:text="${userPost.id}">index</td>
                     <td th:text="${userPost.postCategory}">category</td>
                     <td><a th:href="@{/post/get/{Bno}(Bno=${userPost.id})}" th:text="${userPost.getPostTitle()}">title</a></td>

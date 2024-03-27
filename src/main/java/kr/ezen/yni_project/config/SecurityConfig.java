@@ -105,7 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             // 특정 리소스에 대한 권한 설정 + 추가로 아래 권한에서 유저페이지 헤더쪽 다 열어줘야함
             //0.antMatchers("/**").permitAll()
             .antMatchers("/adminHome", "/admin/adminLogin", "/admin/adminRegister").permitAll()   // 루트에 대한 권한은 전부 허용 // 단 static css 권한은 없음(web:security 추가)
-            .antMatchers("/", "/memberLogin.do" , "/memberRegister.do", "/admin/logout",
+            .antMatchers("/", "/memberLogin.do" , "/memberRegister.do", "/admin/logout", "/auth",
                     "/memberUpdate.do*/**", "user/**", "/memberIdCheck.do",
                     "/memberTelCheck.do", "/memberEmailCheck.do", "/memberInsert.do",
                     "/pwCheck.do", "/pwChange.do", "/memberDelete.do", "/memberInfo.do",

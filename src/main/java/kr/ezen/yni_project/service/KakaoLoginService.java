@@ -146,8 +146,8 @@ public class KakaoLoginService {
         String uuid = UUID.randomUUID().toString().substring(0, 8); // 앞에서 8자리 자름
         user.setPw(kakaoPassword);
         user.setName("KakaoName");
-        user.setAge("KakaoAge");
-        user.setTel("KakaoTel");
+        user.setAge("00");
+        user.setTel("KakaoTel"+"//"+uuid+"//"+email);
         user.setEmail(email);
         user.setZipcode("00000");
         user.setRoadAddr("KakaoRoadAddr");
